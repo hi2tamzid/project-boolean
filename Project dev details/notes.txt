@@ -1,0 +1,17 @@
+workspace
+space
+folders
+task list
+task
+sub tast
+check list
+
+primary objective of project:
+
+* admin will have a default account provided by developer
+* student, supervisor will create account
+* students will form a team(max 3 min 1 person)
+* admin will assign final project to the team & assign a supervisor to it.
+* supervisor will be able to assign task to student
+* students will fill up project info & others
+* advisor, students will be able to print a pdf about all infos regarding project

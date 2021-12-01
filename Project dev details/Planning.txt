@@ -1,0 +1,7 @@
+##
+
+# Admin Panel
+
+# User Panel
+
+# two types of user. a) supervisor, b) student
