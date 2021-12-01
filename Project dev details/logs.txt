@@ -1,0 +1,1 @@
+# create laravel project server shortcut -> laravel new project-boolean
