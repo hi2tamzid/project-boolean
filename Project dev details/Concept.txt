@@ -8,3 +8,18 @@ supervisor will be able to:
 view the details (like: year/date completed, grade achieved,
 marks for each category etc.)
 o See the upcoming groups who are nearly at the final stage
+
+Remaining:
+
+
+
+## Q/A
+
+# Final project a supervisor nije team select korte paren naki dept/admin supervisor team a assign kore den? jodi dept kore dey selection ki lottery er maddhome hoy?
+=> Dept theke kokhono lotery kore dei advisor er maddhome abar kokhono sob match korle advisor nije kono kono gorup er jonno choice onujayi supervisor assign kore den.
+
+# Ekjon supervisor ek session a multiple project er supervisor hote paren?
+=> paren
+
+# Ei platform a supervisor nije project er progress update korbe naki student ra korbe ? naki dui pokkhoi korte parbe?
+=> supervisor entry korbe. Students ra agree korbe.

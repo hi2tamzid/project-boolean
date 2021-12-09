@@ -1,7 +1,30 @@
 ##
 
 # Admin Panel
-
+	Overview
+		Intro message
+		Statistics(number of projects, completed projects, )
+	Projects
+		Select session
+		Create new session
+		Create projects
+		open project details
+	Create supervisor
+		
+	Request
+		request from supervisor 
+	
 # User Panel
 
 # two types of user. a) supervisor, b) student
+
+# User Panel (supervisor)	
+	Dashboard
+	Profile
+	Projects
+	
+
+# User Panel (student)
+	Dashboard
+	Profile
+	Projects

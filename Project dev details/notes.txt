@@ -6,12 +6,34 @@ task
 sub tast
 check list
 
+Task
+-> A supervisor can enter the details (group members info, project info etc.)
+-> See how many groups have completed their projects. Also, can view the details (like: year/date completed, grade achieved, marks for each category etc.)
+-> See the upcoming groups who are nearly at the final stage
+
 primary objective of project:
 
 * admin will have a default account provided by developer
 * student, supervisor will create account
 * students will form a team(max 3 min 1 person)
-* admin will assign final project to the team & assign a supervisor to it.
-* supervisor will be able to assign task to student
-* students will fill up project info & others
+* supervisor|admin|students can create team
+* admin will assign final project to the team & assign a supervisor to it. Or, supervisor can assign himself to a team
+* projects will be categorized by sessions
 * advisor, students will be able to print a pdf about all infos regarding project
+* admin can update project details(group members info, project info etc, year/date completed, grade achieved, marks for each category etc.)
+* progress bar for project
+* admin|supervisor|regular user can create student account
+
+## Waiting list
+* supervisor will be able to assign task to the project
+* students will fill up project info & others
+* students will be able to assign task to the project
+
+# Marks distribution
+	Class‎ Attendenc‎e = 10
+	Class ‎Performance‎ = 10
+	Report‎ = 20
+	Viva‎ = 10
+	Final‎ Exam = 50
+-------------------------------------
+Total = 100
