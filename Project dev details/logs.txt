@@ -1,1 +1,105 @@
 # create laravel project server shortcut -> laravel new project-boolean
+
+# Database Configuration
+	DB_HOST=127.0.0.1:3413
+
+# Create Model & Migration
+
+	php artisan make:model Supervisor -m
+	php artisan make:model Student -m
+	php artisan make:model Project -m
+	php artisan make:model Team -m
+	php artisan make:model Session -m
+	php artisan make:model Project_Supervisor -m
+	php artisan make:model Team_Member -m
+	php artisan make:model Student_Mark -m
+	php artisan make:model Team_Project -m
+	php artisan make:model Project_Session -m
+	
+
+# Creating Database table
+
+	Supervisor(migration)
+		id	integer
+		login_id	integer	 
+		password	string(30)	 
+		name	string(100)	 
+		email	string(50)	 
+		gender	string(7)	 
+		mobile	string(20)	 
+		is_acc_open	boolean	 
+		
+	Supervisor(model)
+		protected $attributes = [
+			'is_acc_open' => TRUE,
+		];
+	
+	Student(migration)
+		id	integer	 
+		student_id	integer	 
+		password	string(30)	 
+		name	string(100)	 
+		email	string(50)	 
+		gender	string(7)	 
+		mobile	string(20)	 
+		year_of_admission	date	 
+		current_semester	string(4)	 
+		batch	integer	 
+		is_graduated	boolean	 
+	
+	Student(model)
+		protected $attributes = [
+			'is_graduated' => TRUE,
+		];
+	
+	Project(migration)
+		id	integer	 
+		name	string(100)	 
+		type	string(100)	 
+		description	text
+		progress	integer	 
+		start_time	date	 
+		end_time	date	 
+		is_completed	boolean	 
+		remark	integer 
+	
+	Project(model)
+		protected $attributes = [
+			'progress' => 0,
+			'is_completed' => FALSE,
+		];
+	
+	Team(migration)
+		id	integer	 
+		name	string(100)
+	
+	Session(migration)
+		integer	 
+		name	string
+	
+	Project_Supervisor(migration)
+		id	integer	 
+		project_id	integer	 
+		supervisor_id	integer	 
+	
+	Team_Member(migration)
+		id	integer	 
+		team_id	integer	 
+		student_id	integer	 
+	
+	Student_Mark(migration)
+		id	integer	 
+		student_id	integer	 
+		session_id	integer	 
+		project_id	integer	 
+		team_id	integer	 
+		class_attendence	integer	 
+		class_performance‎	integer	 
+		report	integer	 
+		viva	integer	 
+		final_exam	integer	 
+	
+	Team_Project(migration)
+		id	integer
+		project_id	integer	 
+		team_id	integer	 
