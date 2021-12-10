@@ -1,4 +1,8 @@
-##
+# Home Panel
+	intro design
+	Login
+	register
+	
 
 # Admin Panel
 	Overview

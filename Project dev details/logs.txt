@@ -103,3 +103,13 @@
 		id	integer
 		project_id	integer	 
 		team_id	integer	 
+	
+	Project_Session(migration)
+		id	integer	 
+		project_id	integer	 
+		session_id	integer	
+
+# Create Controller
+
+	php artisan make:controller HomeController
+	
