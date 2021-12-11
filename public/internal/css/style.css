@@ -1,0 +1,21 @@
+.navlist_cut{
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.navlist_cut a{
+  font-weight: 600;
+  color: #111 !important;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  transition: 0.3s;
+}
+
+.navlist_cut .nav-link.active{
+  color: #1bbd36 !important;
+}
+
+.navlist_cut a:hover{
+  color: #1bbd36 !important;
+}
