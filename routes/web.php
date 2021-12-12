@@ -19,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'home']);
+Route::get('/register', [HomeController::class, 'register']);
+

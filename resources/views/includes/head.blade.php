@@ -20,5 +20,8 @@
   <!-- Login form -->
   <link href="{{ asset('external/login/style.css') }}" rel="stylesheet">
 
+  <!-- Register form -->
+  <link href="{{ asset('external/register/style.css') }}" rel="stylesheet">
+
     <!-- Main CSS File -->
   <link href="{{ asset('internal/css/style.css') }}" rel="stylesheet">

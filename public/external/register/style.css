@@ -1,0 +1,412 @@
+.profile_lower{
+  flex-direction: row;
+}
+.profile_lower{
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_lower > * {
+  width: 100%;
+}
+
+.profile_lower > div > div > p > span{
+  margin-right: 3rem;
+}
+
+.profile_info_title{
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.profile_para_divider{
+  height: 1px;
+  background-color: #000;
+  margin-bottom: 1rem;
+}
+
+.profile_item{
+  
+  width: 89%;
+}
+
+.profile_lower_left > div,
+.profile_lower_right > div{
+  margin-bottom: 2rem;
+}
+
+.profile_info_seperate{
+  display: flex;  
+  justify-content: space-between;
+}
+.signup_form{
+  box-shadow: 0 -4px 7px 0 rgb(0 0 0 / 20%), 0 6px 17px 0 rgb(0 0 0 / 19%);
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 12px;   
+  max-width: 711px;
+  width: 90%;
+  font-size: 1.3rem;
+}
+
+.input_name{
+  display: flex;
+  flex-direction: column;
+}
+
+.signup_form label{
+  font-weight: 500;
+}
+
+.signup_form input{
+  border: none;
+  border-bottom: 1px solid #989898;
+  outline: 0;
+}
+
+.signup_form input:focus{
+  border-bottom: 2px solid #9035b5;
+}
+
+.signup_form div{
+  margin-bottom: 1rem;
+}
+
+.input_gender{
+  display: flex;
+}
+
+.input_gender > div{
+  margin-right: 1rem;
+}
+
+.input_picture input,
+.input_picture input:focus{
+  border-bottom: none;
+}
+
+.input_fieldset{
+  padding:1rem;
+  margin: 2px;
+  border: 2px groove #e0e0e0;
+  border-radius: 9px;
+}
+
+.input_fieldset legend{
+  width: initial;
+  padding: 0.5rem;
+}
+
+.country_city{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.form_input_button{
+  font-size: 1rem;
+  padding: 8px 26px;
+  color: #ffffff !important;
+    border: 1px solid #0d4aab !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3d94f6), color-stop(100%,#1e62d0));
+    text-shadow: -1px -1px 0px #003ea1;
+    outline: none;
+    box-shadow: inset 0px 1px 0px 0px #97c4fe;
+    margin-top: 2rem;
+}
+
+.form_input_button:hover{
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#54a2f9), color-stop(100%,#2e7be3));
+}
+
+.form_input_button:active{
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2e7be3), color-stop(100%,#54a2f9));
+}
+
+/* Form Validation */
+
+.mandatory_star{
+  color: #FF0000;
+}
+
+.input_empty_warning,
+.input_username_warning,
+.input_email_warning,
+.input_confirm_pass_warning{
+  color: #FF0000;
+  display: none;
+  font-weight: 500;
+}
+
+
+.password_warning{
+  color: #ff0000;
+  display: none;
+  font-weight: 500;
+}
+.show_empty_warning{
+  display: block;
+}
+
+/* ################## */
+/* Responsive Designs */
+/* ################## */
+
+/* =================================== */
+/* Media Queries: Extra small device (480px) */
+/* =================================== */
+
+
+@media all and (min-width: 480px){
+
+  .box_input_button {
+    align-items: center;
+    flex-direction: row;
+  }
+  .searchBox_input_p{
+    width: 60%;
+  }
+  .box_input_button p:first-child{
+    margin-right: 2rem;
+    margin-bottom: 0rem;
+  }
+
+  .search_location{
+    flex-direction: row;
+    align-items: center;
+  }
+  .search_location p:first-child{
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    width: 52%;
+  }
+  .searchbox_range{
+    width: 50%;
+  }
+  .header_title{
+    font-size: 5.5rem;
+  }
+  .admin_gallery_video > *{
+    width: 255px;
+  }
+}
+
+/* =================================== */
+/* Media Queries: Medium Small device (576px) */
+/* =================================== */
+
+@media all and (min-width: 576px){
+  .login_button_md,
+  .signup_link {
+    margin-left: auto;
+    margin-top: 0;
+  }
+  
+}
+
+
+/* =================================== */
+/* Media Queries: Small device (768px) */
+/* =================================== */
+
+
+@media all and (min-width: 768px){
+
+  .golf_input_field{
+    width: initial;
+  }
+  .input_name{
+    flex-direction: row;
+  }
+  .input_name div:first-child{
+    margin-right: 5rem;
+  }
+  .signup_form{
+    width: 100%;
+    max-width: 509px;
+  }
+  
+  .country_city{
+    flex-direction: row;
+  }
+  .profile_lower{
+    flex-direction: row;
+  }
+  .signup_form{
+    max-width: 509px;
+    max-width: 800px;
+  }
+  .login_button_md{
+    margin-left: auto;
+    margin-top: 0;
+  }
+  .profile_name{
+    font-size: 1.7rem;
+    margin-left: 2rem;
+  }
+  .profile_pic{
+    width: 31%;
+  }
+  .user_features_comment{
+    flex-direction: row;
+  }
+  .user_features_comment_right{
+    margin-top: 1rem;
+  }
+
+  .admin_user_top{
+    flex-direction: row;
+    align-items: center;
+  }
+  .admin_golf_course_top{
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .admin_user_top img{
+    width: 47%;
+    max-width: 251px;
+  }
+  .admin_golf_course_top img{
+    max-width: 335px;
+  }
+  .course_view_section_1{
+    flex-direction: row;
+  }
+  .cvs_1_2{
+    width: 71%;
+    margin-left: 4rem;
+  }
+  .course_view_section_1 div:nth-child(1){
+    order: 1;
+  }
+  .course_view_section_1 div:nth-child(2){
+    order: 2;
+  }
+}
+
+/* =================================== */
+/* Media Queries: Medium device (992px) */
+/* =================================== */
+
+
+@media all and (min-width: 992px){
+
+  .map_section{
+    width: 96%;
+  }
+  .signup_form{
+    font-size: 1rem;
+  }
+
+  .cubicles{
+    justify-content: space-evenly;
+    flex-direction: row;
+  }
+  .cubic_item{
+    width: 28%;
+    margin-bottom: 0;
+  }
+  .shortcuts{
+    flex-direction: row;
+  }
+  .shortcuts > div:first-child{
+    margin-bottom: 0;
+  }
+  .shortcuts > div{
+    width: 47%;
+  }
+
+  .bottom_2 {
+    flex-direction: row;
+  }
+  .right_hotel_item_top {
+    flex-direction: row;
+}
+}
+
+/* =================================== */
+/* Media Queries: Large device (1200px) */
+/* =================================== */
+
+
+@media all and (min-width: 1200px){
+  .hotel_item {
+    flex-direction: row;
+  }
+  .hotel_item_left {
+    width: 59%;
+  }
+
+  .nav_width{
+    max-width: 1310px;
+  }
+  .admin_user_body > div{
+    flex-direction: row;
+  }
+  .admin_golf_course_top{
+    flex-direction: row;
+  }
+}
+
+
+
+/* =================================== */
+/* Media Queries: Extra Large device (1399px) */
+/* =================================== */
+
+
+@media all and (min-width: 1400px){
+  
+  .main_body{
+    max-width: 1450px;
+  }
+  .detailsGolf{
+    max-width: 1500px;
+  }
+  .map_section{
+    
+    height: 1000px;
+  }
+  
+}
+
+
+/* ==================== */
+/* Overwriting Rules */
+/* ==================== */
+
+.mt0{
+  margin-top: 0 !important;
+}
+.mb0{
+  margin-bottom: 0 !important;
+}
+.ml0{
+  margin-left: 0 !important;
+}
+.mr0{
+  margin-right: 0 !important;
+}
+.m0{
+  margin: 0 !important;
+}
+.pt0{
+  padding-top: 0 !important;
+}
+.pb0{
+  padding-bottom: 0 !important;
+}
+.pl0{
+  padding-left: 0 !important;
+}
+.pr0{
+  padding-right: 0 !important;
+}
+.p0{
+  padding: 0 !important;
+}
+
+.hide_element{
+  display: none;
+}

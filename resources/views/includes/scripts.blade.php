@@ -3,3 +3,6 @@
 
 <!-- Login Form -->
 <script src="{{ asset('external/login/code.js') }}"></script>
+
+<!-- Register form -->
+<script src="{{ asset('external/register/code.js') }}"></script>
