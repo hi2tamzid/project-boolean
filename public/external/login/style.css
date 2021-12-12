@@ -118,14 +118,14 @@
     width: 100px;
     background-color: #fff;
     color: #333;
-    border: 1px solid #333;
+    border: 1px solid #1bbd36;
     padding: 0.4rem;
     transition: 0.3s;
 }
 
 .loginsubmit_btn:hover {
     color: #fff;
-    background: #333
+    background: #1bbd36;
 }
 
 .loginsubmit_btn:focus {
