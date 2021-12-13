@@ -27,7 +27,10 @@
 		email	string(50)	 
 		gender	string(7)	 
 		mobile	string(20)	 
-		is_acc_open	boolean	 
+		is_acc_open	boolean
+		
+		#Altering
+			images
 		
 	Supervisor(model)
 		protected $attributes = [

@@ -1,0 +1,3 @@
+Add image column to the tables
+give css to register form
+add image input in register form
