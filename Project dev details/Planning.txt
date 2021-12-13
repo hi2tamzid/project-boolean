@@ -1,4 +1,4 @@
-# Home Panel
+# Home Page
 	intro design
 	Login
 	register

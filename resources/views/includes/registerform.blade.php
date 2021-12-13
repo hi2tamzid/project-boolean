@@ -24,7 +24,7 @@
     <div class="col-md-6">
       <div class="input-group mb-3">
         <span class="input-group-text" id="register_password">Password</span>
-        <input type="Password" class="form-control" placeholder="Username" aria-label="register_password" aria-describedby="register_password" required>
+        <input type="Password" class="form-control" placeholder="Enter password" aria-label="register_password" aria-describedby="register_password" required>
       </div>
     </div>
   </div>
@@ -49,5 +49,18 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-4">
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Profile Photo</label>
+        <input class="form-control" type="file" id="formFile">
+      </div>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col text-center">
+      <button type="button" class="btn btn-success">Register</button>
+    </div>
+  </div>
 </form>

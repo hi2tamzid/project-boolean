@@ -16,6 +16,9 @@
 	php artisan make:model Team_Project -m
 	php artisan make:model Project_Session -m
 	
+	php artisan make:migration add_image_to_supervisors_table --table=supervisors
+	php artisan make:migration add_image_to_students_table --table=students
+	
 
 # Creating Database table
 
@@ -30,7 +33,7 @@
 		is_acc_open	boolean
 		
 		#Altering
-			images
+			images string
 		
 	Supervisor(model)
 		protected $attributes = [
@@ -48,7 +51,10 @@
 		year_of_admission	date	 
 		current_semester	string(4)	 
 		batch	integer	 
-		is_graduated	boolean	 
+		is_graduated	boolean
+		
+		#Altering
+			images string
 	
 	Student(model)
 		protected $attributes = [

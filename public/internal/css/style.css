@@ -39,3 +39,75 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
+
+
+/* Registration Form */
+
+.signup_form{
+  box-shadow: 0 -4px 7px 0 rgb(0 0 0 / 20%), 0 6px 17px 0 rgb(0 0 0 / 19%);
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 12px;   
+  width: 98%;
+}
+
+/* ################## */
+/* Responsive Designs */
+/* ################## */
+
+/* ========================================= */
+/* Media Queries: Extra small device (480px) */
+/* ========================================= */
+
+@media all and (min-width: 480px){
+  
+}
+
+/* ========================================== */
+/* Media Queries: Medium Small device (576px) */
+/* ========================================== */
+
+@media all and (min-width: 576px){
+
+  .signup_form{
+    width: 76%;
+  }
+
+}
+
+/* =================================== */
+/* Media Queries: Small device (768px) */
+/* =================================== */
+
+@media all and (min-width: 768px){
+  
+}
+
+
+/* ==================================== */
+/* Media Queries: Medium device (992px) */
+/* ==================================== */
+
+@media all and (min-width: 992px){
+  
+}
+
+/* ==================================== */
+/* Media Queries: Large device (1200px) */
+/* ==================================== */
+
+@media all and (min-width: 1200px){
+
+  .signup_form{
+    max-width: 940px;
+  }
+  
+}
+
+/* ========================================== */
+/* Media Queries: Extra Large device (1399px) */
+/* ========================================== */
+
+@media all and (min-width: 1399px){
+  
+}
