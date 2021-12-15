@@ -5,4 +5,4 @@
 <script src="{{ asset('external/login/code.js') }}"></script>
 
 <!-- Register form -->
-<script src="{{ asset('external/register/code.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>

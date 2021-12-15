@@ -8,10 +8,11 @@
 <body>
 
   <header>
-    @include('includes.header')
+    @include('includes.header', ['registerActive' => $registerActive ?? '', 'homeActive' => $homeActive ?? ''])
   </header>
+
   
-  @yield('content')
+    @yield('content')
 
   <!-- Vendor JS Files -->
   @include('includes.scripts')

@@ -1,0 +1,1 @@
+<h1 class="home_title animate__animated animate__fadeInDown">Manage student's projects effectively & efficiently</h1>

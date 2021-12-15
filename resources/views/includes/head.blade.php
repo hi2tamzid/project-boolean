@@ -19,6 +19,11 @@
 
   <!-- Login form -->
   <link href="{{ asset('external/login/style.css') }}" rel="stylesheet">
+  
+  <!-- Animate CSS  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"  />
 
   <!-- Main CSS File -->
   <link href="{{ asset('internal/css/style.css') }}" rel="stylesheet">
+
+  

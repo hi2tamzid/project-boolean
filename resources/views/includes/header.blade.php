@@ -7,13 +7,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 navlist_cut">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ URL::to('/') }}">Home</a>
+          <a class="nav-link {{ $homeActive }}" aria-current="page" href="{{ URL::to('/') }}">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginform"><i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ URL::to('/register/') }}"><i class="fas fa-user-plus"></i> Register</a>
+          <a class="nav-link {{ $registerActive }}" href="{{ URL::to('/register/') }}"><i class="fas fa-user-plus"></i> Register</a>
         </li>
       </ul>
       
