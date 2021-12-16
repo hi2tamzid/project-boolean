@@ -7,13 +7,16 @@
 # Admin Panel
 	Overview
 		Intro message
-		Statistics(number of projects, completed projects, )
-	Projects
-		Select session
-		Create new session
-		Create projects
-		open project details
-	Create supervisor
+		Statistics(Total supervisors,Total projects, completed projects, Total sessions, total students)
+	Control Panel
+		Projects
+			Select session
+			Create new session
+			Create projects
+			open project details
+		Supervisors
+		Students
+		Sessions
 		
 	Request
 		request from supervisor 

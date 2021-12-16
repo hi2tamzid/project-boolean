@@ -15,6 +15,7 @@
 	php artisan make:model Student_Mark -m
 	php artisan make:model Team_Project -m
 	php artisan make:model Project_Session -m
+	php artisan make:model Admin -m
 	
 	php artisan make:migration add_image_to_supervisors_table --table=supervisors
 	php artisan make:migration add_image_to_students_table --table=students
@@ -116,7 +117,12 @@
 	Project_Session(migration)
 		id	integer	 
 		project_id	integer	 
-		session_id	integer	
+		session_id	integer
+	
+	Admin(migration)
+		id integer
+		login_id string
+		password string(30)
 
 # Create Controller
 

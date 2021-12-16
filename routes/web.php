@@ -20,4 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home']);
 Route::get('/register', [HomeController::class, 'register']);
+Route::get('/register-admin', [HomeController::class, 'register_admin']);
+Route::post('/store-admin', [HomeController::class, 'store_admin']);
 
