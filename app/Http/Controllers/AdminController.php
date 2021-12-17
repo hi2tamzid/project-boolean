@@ -65,7 +65,30 @@ class AdminController extends Controller
     }
     public function logout(Request $request)
     {
-        $request->session()->forget('login_id');
+        $request->session()->forget('admin_login_id');
         return redirect()->to('/login-admin');
+    }
+    public function supervisor()
+    {
+        $supervisors = Supervisor::all();
+        return view('pages.adminSupervisorPanel', compact('supervisors'));
+    }
+    public function supervisorRegister()
+    {
+        return view('pages.adminSupervisorRegister');
+    }
+    public function supervisorRegistrationSubmit(Request $r)
+    {
+        $obj = new Supervisor();
+        $obj->login_id = $r->login_id;
+        $obj->password = $r->password;
+        $obj->name = $r->name;
+        $obj->email = $r->email;
+        $obj->gender = $r->gender;
+        $obj->mobile = $r->mobile;
+        $obj->image = $obj->imageUpload($r);
+        $obj->save();
+
+        return redirect()->to('/admin-supervisor-register')->with('msg', 'Registration  Successful');
     }
 }

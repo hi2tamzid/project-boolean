@@ -46,6 +46,7 @@
 		gender	string(7)	 
 		mobile	string(20)	 
 		is_acc_open	boolean
+		image string
 		
 		#Altering
 			images string
