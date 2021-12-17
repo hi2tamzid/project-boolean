@@ -27,6 +27,12 @@
 
 # Middleware
 
+	php artisan make:middleware IsAdminIn
+	
+	
+	In $routeMiddleware
+		'IsAdminIn' => \App\Http\Middleware\IsAdminIn::class,
+
 # Creating Database table
 
 	Supervisor(migration)
