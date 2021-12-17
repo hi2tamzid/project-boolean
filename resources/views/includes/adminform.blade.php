@@ -3,8 +3,13 @@
   <strong>{{Session::get('msg')}}</strong>
 </div>
 @endif
-<form action="{{URL::to('/store-admin')}}" class="signup_form" method="post">
-{{ csrf_field() }}
+@if(Session::has('err_msg'))
+<div class="alert alert-danger" role="alert">
+  {{ Session::get('err_msg') }}
+</div>
+@endif
+<form action="{{URL::to($admin_route)}}" class="signup_form" method="post">
+  {{ csrf_field() }}
   <div class="row">
     <div class="col-md-6">
       <div class="input-group mb-3">

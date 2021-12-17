@@ -19,7 +19,13 @@
 	
 	php artisan make:migration add_image_to_supervisors_table --table=supervisors
 	php artisan make:migration add_image_to_students_table --table=students
-	
+
+# Controller
+
+	php artisan make:controller HomeController
+	php artisan make:controller AdminController
+
+# Middleware
 
 # Creating Database table
 
@@ -124,7 +130,5 @@
 		login_id string
 		password string(30)
 
-# Create Controller
 
-	php artisan make:controller HomeController
 	

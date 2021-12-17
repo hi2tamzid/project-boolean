@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home']);
 Route::get('/register', [HomeController::class, 'register']);
-Route::get('/register-admin', [HomeController::class, 'register_admin']);
-Route::post('/store-admin', [HomeController::class, 'store_admin']);
+
+// Admin
+Route::get('/register-admin', [AdminController::class, 'register_admin']);
+Route::post('/store-admin', [AdminController::class, 'store_admin']);
+Route::get('/login-admin', [AdminController::class, 'login']);
+Route::post('/login-admin', [AdminController::class, 'login_admin']);
+Route::group(['middleware' => 'IsAdminIn'], function () {
+  Route::get('/admin-dashboard', [AdminController::class, 'dashboard']);
+});
 
