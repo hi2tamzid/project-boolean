@@ -7,7 +7,7 @@
 # Admin Panel
 	Overview
 		Intro message
-		Statistics(Total supervisors,Total projects, completed projects, Total sessions, total students)
+		Statistics(Total supervisors,Total projects, completed projects, Total sessions, total students, teams)
 	Control Panel
 		Projects
 			Select session
@@ -17,8 +17,9 @@
 		Supervisors
 		Students
 		Sessions
+		Teams	
 		
-	Request
+	Request(waiting)
 		request from supervisor 
 	
 # User Panel

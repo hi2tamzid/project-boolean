@@ -19,15 +19,20 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [HomeController::class, 'home']);
-Route::get('/register', [HomeController::class, 'register']);
+Route::group(['middleware' => 'IsLoggedIn'], function () {
+  Route::get('/', [HomeController::class, 'home']);
+  Route::get('/register', [HomeController::class, 'register']);
+});
 
 // Admin
-Route::get('/register-admin', [AdminController::class, 'register_admin']);
-Route::post('/store-admin', [AdminController::class, 'store_admin']);
+Route::get('/register-admin', [AdminController::class, 'registerAdmin']);
+Route::post('/store-admin', [AdminController::class, 'storeAdmin']);
 Route::get('/login-admin', [AdminController::class, 'login']);
-Route::post('/login-admin', [AdminController::class, 'login_admin']);
+Route::get('/logout-admin', [AdminController::class, 'logout']);
+Route::post('/login-admin', [AdminController::class, 'loginAdmin']);
 Route::group(['middleware' => 'IsAdminIn'], function () {
   Route::get('/admin-dashboard', [AdminController::class, 'dashboard']);
+  Route::get('/control-panel', [AdminController::class, 'controlPanel']);
 });
+
 

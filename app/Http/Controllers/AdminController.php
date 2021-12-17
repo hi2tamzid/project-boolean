@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Student;
+use App\Models\Project;
+use App\Models\Supervisor;
+use App\Models\Session;
+use App\Models\Team;
 
 class AdminController extends Controller
 {
-    public function register_admin()
+    public function registerAdmin()
     {
         return view('pages.adminregister');
     }
 
-    public function store_admin(Request $r)
+    public function storeAdmin(Request $r)
     {
         $obj = new Admin();
         $obj->login_id = $r->login_id;
@@ -26,7 +31,7 @@ class AdminController extends Controller
     {
         return view('pages.adminlogin');
     }
-    public function login_admin(Request $request)
+    public function loginAdmin(Request $request)
     {
         $login_id = $request->login_id;
         $password = $request->password;
@@ -46,6 +51,21 @@ class AdminController extends Controller
     }
     public function dashboard()
     {
-        return view('pages.admindashboard');
+        $students = Student::all()->count();
+        $projects = Project::all()->count();
+        $completed_projects = Project::where('is_completed', true)->count();
+        $supervisors = Supervisor::all()->count();
+        $sessions = Session::all()->count();
+        $teams = Team::all()->count();
+        return view('pages.admindashboard', compact('students', 'projects', 'completed_projects', 'supervisors', 'sessions', 'teams'));
+    }
+    public function controlPanel()
+    {
+        return view('pages.adminControlPanel');
+    }
+    public function logout(Request $request)
+    {
+        $request->session()->forget('login_id');
+        return redirect()->to('/login-admin');
     }
 }

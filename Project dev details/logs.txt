@@ -28,10 +28,12 @@
 # Middleware
 
 	php artisan make:middleware IsAdminIn
+	php artisan make:middleware IsLoggedIn
 	
 	
 	In $routeMiddleware
 		'IsAdminIn' => \App\Http\Middleware\IsAdminIn::class,
+		'IsLoggedIn' => \App\Http\Middleware\IsLoggedIn::class,
 
 # Creating Database table
 

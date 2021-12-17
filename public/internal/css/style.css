@@ -14,7 +14,7 @@
   color: #111 !important;
   white-space: nowrap;
   text-transform: uppercase;
-  transition: 0.3s;
+  transition: color 0.3s;
 }
 
 .navlist_cut .nav-link.active{
@@ -72,6 +72,61 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+/* =========== */
+/* Admin Panel */
+/* =========== */
+
+.admin_dash{
+  background-color: #d7d7d7;
+  border-radius: 9px;
+  width: 100%;
+}
+
+.admin_dash > div{
+  padding: 0.5rem;
+}
+.admin_dash_1, .admin_dash_2{
+  /* width: 35%; */
+  padding: 1rem;
+  background-color: #fff;
+  margin: 1rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+}
+
+/* Control Panel */
+
+.control_panel_box{
+  box-shadow: 0 -4px 7px 0 rgb(0 0 0 / 20%), 0 6px 17px 0 rgb(0 0 0 / 19%);
+  border-radius: 7px;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.control_item{
+  width: 25%;
+  border-radius: 7px;
+  border: 1px solid #0a58ca;
+  padding: 0.5rem;
+  box-shadow: 0px 2px 15px rgb(0 0 0 / 24%);
+  margin-right: 0.9rem;
+  margin-top: 0.7rem;
+}
+
+.control_item_icon{
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.control_item_title{
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+.control_item_btn{
+  text-align: center;
+}
 
 /* ################## */
 /* Responsive Designs */
@@ -111,7 +166,9 @@
 /* ==================================== */
 
 @media all and (min-width: 992px){
-  
+  .admin_dash{
+    width: 58%;
+  }
 }
 
 /* ==================================== */
