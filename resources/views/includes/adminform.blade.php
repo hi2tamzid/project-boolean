@@ -26,7 +26,7 @@
   </div>
   <div class="row">
     <div class="col text-center">
-      <button type="submit" class="btn btn-success">Register</button>
+      <button type="submit" class="btn btn-success">{{$button_name}}</button>
     </div>
   </div>
 </form>

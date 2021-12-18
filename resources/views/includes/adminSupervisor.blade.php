@@ -21,65 +21,61 @@
         </div>
       </form>
     </div>
+    @if(Session::has('msg'))
+    <div class="alert alert-success mt-" role="alert">
+      <strong>{{Session::get('msg')}}</strong>
+    </div>
+    @endif
     <div class="comment_main_section">
-      @if($supervisors)
+      @if(!$supervisors->isEmpty())
       @foreach($supervisors as $s)
       <div class="comment_item">
         <div class="comment_operation">
-          <p><a class="input_button comment_operation_delete" href="javascript:void(0);" onclick="confirm('Warning: Are you sure you want to delete the account:');"><i class="far fa-trash-alt"></i> Delete Account</a></p>
+          <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminSupervisorDeleteModal{{ $s->id }}"><i class="far fa-trash-alt"></i> Delete Account</a></p>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="adminSupervisorDeleteModal{{ $s->id }}" tabindex="-1" aria-labelledby="adminSupervisorDeleteModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="adminSupervisorDeleteModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to delete <b>{{ $s->name }}</b> ?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="{{ URL::to('/admin-supervisor-delete/'.$s->id) }}" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#adminSupervisorDeleteModal">Delete</a>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="comment_golf_course admin_user_top">
-          <img src="~/pic/rep.jpg" alt="Profile Picture">
-          <p class="mb0">{{$s->name}}</p>
+          <img src="{{ asset('image/'.$s->image) }}" alt="{{$s->name}}">
+          <p class="mb0">Name: {{$s->name}}</p>
         </div>
         <div class="comment_body admin_user_body">
           <div>
-            <p>Username: hi2tamzid</p>
-            <p>Country: Bangladesh</p>
+            <p>Login ID: {{$s->login_id}}</p>
+            <p>Email: {{$s->email}}</p>
           </div>
           <div>
-            <p>Email: tamzidmahmud2@gmail.com</p>
-            <p>Contact No: 01864988944</p>
+            <p>Gender: {{$s->gender}}</p>
+            <p>Contact No: {{$s->mobile}}</p>
           </div>
           <div>
-            <p>Photos Uploaded: 3</p>
-            <p>Details Provided: 5</p>
+            <p>Project Supervised: 3</p>
+            <p>Session assigned: 5</p>
           </div>
           <p><a class="input_button user_search_button" asp-page="AdminUserDetails"><i class="far fa-trash-alt"></i>
               More details</a></p>
         </div>
       </div>
       @endforeach
-        @else
-        <p>No data found</p>
-        @endif
-
-      <div class="comment_item">
-        <div class="comment_operation">
-          <p><a class="input_button comment_operation_delete" href="javascript:void(0);" onclick="confirm('Warning: Are you sure you want to delete the account:');"><i class="far fa-trash-alt"></i> Delete Account</a></p>
-        </div>
-        <div class="comment_golf_course admin_user_top">
-          <img src="~/pic/rep.jpg" alt="Profile Picture">
-          <p class="mb0">Tamzid Mahmud</p>
-        </div>
-        <div class="comment_body admin_user_body">
-          <div>
-            <p>Username: hi2tamzid</p>
-            <p>Country: Bangladesh</p>
-          </div>
-          <div>
-            <p>Email: tamzidmahmud2@gmail.com</p>
-            <p>Contact No: 01864988944</p>
-          </div>
-          <div>
-            <p>Photos Uploaded: 3</p>
-            <p>Details Provided: 5</p>
-          </div>
-          <p><a class="input_button user_search_button" asp-page="AdminUserDetails"><i class="far fa-trash-alt"></i>
-              More details</a></p>
-        </div>
-      </div>
-
+      @else
+      <p>No data found</p>
+      @endif
     </div>
   </div>
 </section>

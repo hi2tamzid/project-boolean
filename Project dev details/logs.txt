@@ -1,3 +1,6 @@
+Admin login url => http://127.0.0.1:8000/login-admin
+Admin registration url => http://127.0.0.1:8000/register-admin
+
 # create laravel project server shortcut -> laravel new project-boolean
 
 # Database Configuration

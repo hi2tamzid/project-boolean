@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Supervisor;
 use App\Models\Session;
 use App\Models\Team;
+use App\Models\Project_Supervisor;
 
 class AdminController extends Controller
 {
@@ -71,7 +72,10 @@ class AdminController extends Controller
     public function supervisor()
     {
         $supervisors = Supervisor::all();
-        return view('pages.adminSupervisorPanel', compact('supervisors'));
+        $project_supervisor = Project_Supervisor::groupBy('supervisor_id')
+               ->count();
+        // dd($project_supervisor);
+        return view('pages.adminSupervisorPanel', compact('supervisors', 'project_supervisor'));
     }
     public function supervisorRegister()
     {
@@ -90,5 +94,11 @@ class AdminController extends Controller
         $obj->save();
 
         return redirect()->to('/admin-supervisor-register')->with('msg', 'Registration  Successful');
+    }
+    public function supervisorDelete($id)
+    {
+        $obj = Supervisor::find($id);
+        $obj->delete();
+        return redirect()->to('/admin-supervisor')->with('msg', 'Admin account  successfully deleted');
     }
 }

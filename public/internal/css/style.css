@@ -447,7 +447,14 @@
   .user_features_comment_right{
     margin-top: 1rem;
   }
-  
+  .admin_user_top{
+    flex-direction: row;
+    align-items: center;
+  }
+  .admin_user_top img{
+    width: 21%;
+    max-width: 251px;
+  }
 }
 
 
@@ -470,7 +477,9 @@
   .signup_form{
     max-width: 940px;
   }
-  
+  .admin_user_body > div{
+    flex-direction: row;
+  }
 }
 
 /* ========================================== */
