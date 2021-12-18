@@ -17,7 +17,7 @@
   </ul>
 </div>
 @endif -->
-<form action="{{ URL::to('/admin-supervisor-register') }}" class="signup_form mt-3 mb-5" method="post" enctype="multipart/form-data">
+<form action="{{ URL::to('/admin-student-register') }}" class="signup_form mt-3 mb-5" method="post" enctype="multipart/form-data">
   {{ csrf_field() }}
   <div class="row">
     <div class="col-md-6">
@@ -43,8 +43,8 @@
   <div class="row">
     <div class="col-md-6">
       <div class="input-group mb-3">
-        <span class="input-group-text" id="register_login_id">Login ID</span>
-        <input name="login_id" value="{{ old('login_id') }}" type="text" class="form-control" placeholder="Enter login id" aria-label="register_login_id" aria-describedby="register_login_id" required>
+        <span class="input-group-text" id="register_login_id">Student ID</span>
+        <input name="student_id" value="{{ old('student_id') }}" type="text" class="form-control" placeholder="Enter student id" aria-label="register_login_id" aria-describedby="register_login_id" required>
         @if($errors->has('login_id'))
         <span class="err">{{ $errors->first('login_id') }}</span>
         @endif
@@ -88,6 +88,45 @@
   </div>
 
   <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="year_of_admission" class="form-label">Admission date</label><br>
+        <input name="year_of_admission" value="{{ old('year_of_admission') }}" type="date" class="form-control" aria-label="year_of_admission" aria-describedby="year_of_admission" required>
+        @if($errors->has('year_of_admission'))
+        <span class="err">{{ $errors->first('year_of_admission') }}</span>
+        @endif
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="current_semester" class="form-label">Current Semester</label><br>
+        <select name="current_semester" class="form-select" aria-label="current_semester">
+          <option value="1st" {{ old('current_semester') == "1st" ? "selected" : "" }}>1st</option>
+          <option value="2nd" {{ old('current_semester') == "2nd" ? "selected" : "" }}>2nd</option>
+          <option value="3rd" {{ old('current_semester') == "3rd" ? "selected" : "" }}>3rd</option>
+          <option value="4th" {{ old('current_semester') == "4th" ? "selected" : "" }}>4th</option>
+          <option value="5th" {{ old('current_semester') == "5th" ? "selected" : "" }}>5th</option>
+          <option value="6th" {{ old('current_semester') == "6th" ? "selected" : "" }}>6th</option>
+          <option value="7th" {{ old('current_semester') == "7th" ? "selected" : "" }}>7th</option>
+          <option value="8th" {{ old('current_semester') == "8th" ? "selected" : "" }}>8th</option>
+        </select>
+        @if($errors->has('current_semester'))
+        <span class="err">{{ $errors->first('current_semester') }}</span>
+        @endif
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="col-md-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="batch">Batch (in number)</span>
+        <input name="batch" value="{{ old('batch') }}" type="text" class="form-control" placeholder="Enter batch no" aria-label="batch" aria-describedby="batch" required>
+        @if($errors->has('batch'))
+        <span class="err">{{ $errors->first('batch') }}</span>
+        @endif
+      </div>
+    </div>
     <div class="col-4">
       <div class="mb-3">
         <label for="formFile" class="form-label">Profile Photo</label>
@@ -97,6 +136,8 @@
         @endif
       </div>
     </div>
+    <!-- <div class="col-md-2"></div> -->
+    
   </div>
 
   <div class="row">

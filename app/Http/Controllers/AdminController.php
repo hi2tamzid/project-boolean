@@ -94,7 +94,8 @@ class AdminController extends Controller
                 'required',
                 Rule::in(['male', 'female'])
             ],
-            'mobile' => 'required'
+            'mobile' => 'required',
+            'image' => 'image'
         ]);
 
         $obj = new Supervisor();
@@ -118,7 +119,59 @@ class AdminController extends Controller
     }
     public function supervisorDetails($id)
     {
-        $obj = Supervisor::find($id);
-        return ;
+        $supervisor = Supervisor::find($id);
+        return view('pages.adminSupervisorDetails', compact('supervisor'));
     }
+    
+    // Student Controllers
+    
+    public function student()
+    {
+        $student = Student::all();
+        return view('pages.adminStudentPanel', compact('student'));
+    }
+
+    public function studentRegister()
+    {
+        return view('pages.adminStudentRegister');
+    }
+    public function studentRegisterSubmit(Request $r)
+    {
+        $validated = $r->validate([
+            'student_id' => 'required',
+            'password' => ['required', Password::min(6)->letters()],// Require at least one letter and  at least 6 characters...
+            'name' => 'required',
+            'email' => 'required|email|unique:App\Models\Student,email',
+            'gender' => [
+                'required',
+                Rule::in(['male', 'female'])
+            ],
+            'mobile' => 'required',
+            'year_of_admission' => 'required|date',
+            'current_semester' => [
+                'required',
+                Rule::in(['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th'])
+            ],
+            'batch' => 'required|integer',
+            'image' => 'image'
+        ]);
+
+        $obj = new Student();
+        $imgProcess = new Supervisor();
+        $obj->student_id = $r->student_id;
+        $obj->password = $r->password;
+        $obj->name = $r->name;
+        $obj->email = $r->email;
+        $obj->gender = $r->gender;
+        $obj->mobile = $r->mobile;
+        $obj->year_of_admission = $r->year_of_admission;
+        $obj->current_semester = $r->current_semester;
+        $obj->batch = $r->batch;
+        if($r->has('image'))
+            $obj->image = $imgProcess->imageUpload($r);
+        $obj->save();
+
+        return redirect()->to('/admin-student-register')->with('msg', 'Registration  Successful');
+    }
+    
 }

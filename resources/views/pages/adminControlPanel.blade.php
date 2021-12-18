@@ -20,7 +20,7 @@
         </div>
         <p class="control_item_title">Student</p>
         <div class="control_item_btn">
-          <a href="#" class="btn btn-primary text-center">Click here</a>
+          <a href="{{URL::to('admin-student')}}" class="btn btn-primary text-center">Click here</a>
         </div>
       </div>
       <div class="control_item">
