@@ -68,8 +68,7 @@
             <p>Project Supervised: 3</p>
             <p>Session assigned: 5</p>
           </div>
-          <p><a class="input_button user_search_button" asp-page="AdminUserDetails"><i class="far fa-trash-alt"></i>
-              More details</a></p>
+          <p><a href="{{ URL::to('/admin-supervisor-details/'.$s->id) }}" class="input_button button_link user_search_button"><i class="fas fa-info-circle"></i> More details</a></p>
         </div>
       </div>
       @endforeach

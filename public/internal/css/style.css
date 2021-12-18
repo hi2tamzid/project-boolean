@@ -351,6 +351,7 @@
   margin-top: 1rem;
   background-color: #007bff;
   color: #fff;
+  text-decoration: none;
 }
 
 .user_search_button:hover{

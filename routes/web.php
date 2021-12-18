@@ -37,7 +37,5 @@ Route::group(['middleware' => 'IsAdminIn'], function () {
   Route::get('/admin-supervisor-register', [AdminController::class, 'supervisorRegister']);
   Route::post('/admin-supervisor-register', [AdminController::class, 'supervisorRegistrationSubmit']);
   Route::get('/admin-supervisor-delete/{id}', [AdminController::class, 'supervisorDelete']);
-
+  Route::get('/admin-supervisor-details/{id}', [AdminController::class, 'supervisorDetails']);
 });
-
-

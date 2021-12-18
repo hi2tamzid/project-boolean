@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Admin;
 use App\Models\Student;
 use App\Models\Project;
@@ -83,6 +85,18 @@ class AdminController extends Controller
     }
     public function supervisorRegistrationSubmit(Request $r)
     {
+        $validated = $r->validate([
+            'login_id' => 'required',
+            'password' => ['required', Password::min(6)->letters()],// Require at least one letter and  at least 6 characters...
+            'name' => 'required',
+            'email' => 'required|email|unique:App\Models\Supervisor,email',
+            'gender' => [
+                'required',
+                Rule::in(['male', 'female'])
+            ],
+            'mobile' => 'required'
+        ]);
+
         $obj = new Supervisor();
         $obj->login_id = $r->login_id;
         $obj->password = $r->password;
@@ -90,7 +104,8 @@ class AdminController extends Controller
         $obj->email = $r->email;
         $obj->gender = $r->gender;
         $obj->mobile = $r->mobile;
-        $obj->image = $obj->imageUpload($r);
+        if($r->has('image'))
+            $obj->image = $obj->imageUpload($r);
         $obj->save();
 
         return redirect()->to('/admin-supervisor-register')->with('msg', 'Registration  Successful');
@@ -100,5 +115,10 @@ class AdminController extends Controller
         $obj = Supervisor::find($id);
         $obj->delete();
         return redirect()->to('/admin-supervisor')->with('msg', 'Admin account  successfully deleted');
+    }
+    public function supervisorDetails($id)
+    {
+        $obj = Supervisor::find($id);
+        return ;
     }
 }
