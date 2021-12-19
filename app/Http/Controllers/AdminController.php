@@ -22,6 +22,11 @@ class AdminController extends Controller
 
     public function storeAdmin(Request $r)
     {
+        $validated = $r->validate([
+            'login_id' => 'required|unique:App\Models\Admin,login_id',
+            'password' => ['required', Password::min(6)]// Require  at least 6 characters...
+            
+        ]);
         $obj = new Admin();
         $obj->login_id = $r->login_id;
         $obj->password = $r->password;
@@ -86,7 +91,7 @@ class AdminController extends Controller
     public function supervisorRegistrationSubmit(Request $r)
     {
         $validated = $r->validate([
-            'login_id' => 'required',
+            'login_id' => 'required|unique:App\Models\Supervisor,login_id',
             'password' => ['required', Password::min(6)->letters()],// Require at least one letter and  at least 6 characters...
             'name' => 'required',
             'email' => 'required|email|unique:App\Models\Supervisor,email',
@@ -138,7 +143,7 @@ class AdminController extends Controller
     public function studentRegisterSubmit(Request $r)
     {
         $validated = $r->validate([
-            'student_id' => 'required',
+            'student_id' => 'required|unique:App\Models\Student,student_id',
             'password' => ['required', Password::min(6)->letters()],// Require at least one letter and  at least 6 characters...
             'name' => 'required',
             'email' => 'required|email|unique:App\Models\Student,email',
@@ -173,5 +178,52 @@ class AdminController extends Controller
 
         return redirect()->to('/admin-student-register')->with('msg', 'Registration  Successful');
     }
-    
+    public function studentDelete($id)
+    {
+        $obj = Student::find($id);
+        $obj->delete();
+        return redirect()->to('/admin-student')->with('msg', 'Student account  successfully deleted');
+    }
+    public function studentDetails()
+    {
+        $student = Student::find($id);
+        return view('pages.adminstudentDetails', compact('student'));
+    }
+
+
+    public function project()
+    {
+        $project = Project::all();
+        return view('pages.adminprojectPanel', compact('project'));
+    }
+
+    public function session()
+    {
+        $session = Session::all();
+        return view('pages.adminSessionPanel', compact('session'));
+    }
+    public function sessionRegister()
+    {
+        return view('pages.adminSessionRegister');
+    }
+    public function sessionRegisterSubmit(Request $r)
+    {
+        $validated = $r->validate([
+            'name' => 'required|unique:App\Models\Session,name'
+        ]);
+
+        $obj = new Session();
+
+        $obj->name = $r->name;
+
+        $obj->save();
+
+        return redirect()->to('/admin-session-register')->with('msg', 'Registration  Successful');
+    }
+    public function sessionDelete($id)
+    {
+        $obj = Session::find($id);
+        $obj->delete();
+        return redirect()->to('/admin-session')->with('msg', 'Session  successfully deleted');
+    }
 }

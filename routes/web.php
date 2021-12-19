@@ -45,4 +45,15 @@ Route::group(['middleware' => 'IsAdminIn'], function () {
   Route::get('/admin-student', [AdminController::class, 'student']);
   Route::get('/admin-student-register', [AdminController::class, 'studentRegister']);
   Route::post('/admin-student-register', [AdminController::class, 'studentRegisterSubmit']);
+  Route::get('/admin-student-delete/{id}', [AdminController::class, 'studentDelete']);
+  Route::get('/admin-student-details/{id}', [AdminController::class, 'studentDetails']);
+
+  // Admin project
+  Route::get('/admin-project', [AdminController::class, 'project']);
+
+  // Admin Session
+  Route::get('/admin-session', [AdminController::class, 'session']);
+  Route::get('/admin-session-register', [AdminController::class, 'sessionRegister']);
+  Route::post('/admin-session-register', [AdminController::class, 'sessionRegisterSubmit']);
+  Route::get('/admin-session-delete/{id}', [AdminController::class, 'sessionDelete']);
 });

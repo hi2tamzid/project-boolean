@@ -1,5 +1,9 @@
 /* Reused Components */
 
+.err{
+  color: #ff0000;
+}
+
 .inputLabel{
   font-size: var(--label-fontsize);
 }

@@ -53,7 +53,7 @@
     <div class="col-md-6">
       <div class="input-group mb-3">
         <span class="input-group-text" id="register_password">Password</span>
-        <input name="password" value="{{ old('email') }}" type="Password" class="form-control" placeholder="Enter password" aria-label="register_password" aria-describedby="register_password" required>
+        <input name="password" value="{{ old('password') }}" type="Password" class="form-control" placeholder="Enter password" aria-label="register_password" aria-describedby="register_password" required>
         @if($errors->has('password'))
         <span class="err">{{ $errors->first('password') }}</span>
         @endif
