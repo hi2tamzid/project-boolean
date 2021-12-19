@@ -7,4 +7,4 @@
 <!-- Register form -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
-<script src="{{ asset('internal/code.js') }}"></script>
+<script src="{{ asset('internal/js/code.js') }}"></script>

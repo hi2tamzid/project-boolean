@@ -12,6 +12,7 @@ use App\Models\Supervisor;
 use App\Models\Session;
 use App\Models\Team;
 use App\Models\Project_Supervisor;
+use App\Models\Team_Member;
 
 class AdminController extends Controller
 {
@@ -184,7 +185,7 @@ class AdminController extends Controller
         $obj->delete();
         return redirect()->to('/admin-student')->with('msg', 'Student account  successfully deleted');
     }
-    public function studentDetails()
+    public function studentDetails($id)
     {
         $student = Student::find($id);
         return view('pages.adminstudentDetails', compact('student'));
@@ -225,5 +226,49 @@ class AdminController extends Controller
         $obj = Session::find($id);
         $obj->delete();
         return redirect()->to('/admin-session')->with('msg', 'Session  successfully deleted');
+    }
+
+    // Team Controller
+
+    public function team()
+    {
+        $team = Team::all();
+        return view('pages.adminTeamPanel', compact('team'));
+    }
+
+    public function teamRegister()
+    {
+        
+        return view('pages.adminTeamRegister');
+    }
+    public function teamRegisterSubmit(Request $r)
+    {
+        $validated = $r->validate([
+            'name' => 'required',
+            'member_number' => 'required|integer|between:1,3'
+        ]);
+
+        $obj = new Team();
+        $obj->name = $r->name;
+        $obj->member_number = $r->member_number;
+        
+        $obj->save();
+        $curr_id = Team::latest()->first()->id;
+        $member_number = $obj->member_number;
+        // dd($curr_id);
+        $student = Student::all();
+
+        return view('pages.adminTeamRegister', compact('member_number', 'curr_id', 'student'));
+    }
+    public function teamRegisterSubmit2(Request $r)
+    {
+        for($i = 1 ; $i <= $r->member_number ; $i++)
+        {
+            $obj = new Team_Member();
+            $obj->team_id = $r->curr_id;
+            $obj->student_id = $r->{'member'.$i};
+            $obj->save();
+        }
+        return redirect()->to('/admin-team-register2')->with('msg', 'Team  successfully created');
     }
 }

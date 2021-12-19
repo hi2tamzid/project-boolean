@@ -29,7 +29,7 @@
         </div>
         <p class="control_item_title">Project</p>
         <div class="control_item_btn">
-          <a href="#" class="btn btn-primary text-center">Click here</a>
+          <a href="{{URL::to('admin-project')}}" class="btn btn-primary text-center">Click here</a>
         </div>
       </div>
       <div class="control_item">
@@ -38,7 +38,7 @@
         </div>
         <p class="control_item_title">Session</p>
         <div class="control_item_btn">
-          <a href="#" class="btn btn-primary text-center">Click here</a>
+          <a href="{{URL::to('admin-session')}}" class="btn btn-primary text-center">Click here</a>
         </div>
       </div>
       <div class="control_item">
@@ -47,7 +47,7 @@
         </div>
         <p class="control_item_title">Team</p>
         <div class="control_item_btn">
-          <a href="#" class="btn btn-primary text-center">Click here</a>
+          <a href="{{URL::to('admin-team')}}" class="btn btn-primary text-center">Click here</a>
         </div>
       </div>
     </div>
