@@ -1,5 +1,6 @@
 make image upload function global
 search user in students & supervisors
 retrive softdelete 
+update operation
 
 Some validation(date format)

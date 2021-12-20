@@ -23,62 +23,79 @@
     </div>
     @if(Session::has('msg'))
     <div class="alert alert-success mt-" role="alert">
-      <strong>{{Session::get('msg')}}</strong>
+      <strong>{{Session::get('msg') }}</strong>
     </div>
     @endif
     <div class="comment_main_section">
       @if(!$team->isEmpty())
-      @foreach($student as $s)
+      @foreach($team as $t)
       <div class="comment_item">
         <div class="comment_operation">
-          <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminStudentDeleteModal{{ $s->id }}"><i class="far fa-trash-alt"></i> Delete Account</a></p>
+          <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminTeamDeleteModal{{ $t->id }}"><i class="far fa-trash-alt"></i> Delete Team</a></p>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="adminStudentDeleteModal{{ $s->id }}" tabindex="-1" aria-labelledby="adminStudentDeleteModalLabel" aria-hidden="true">
+        <div class="modal fade" id="adminTeamDeleteModal{{ $t->id }}" tabindex="-1" aria-labelledby="adminTeamDeleteModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="adminStudentDeleteModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="adminTeamDeleteModalLabel">Modal title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                Are you sure you want to delete <b>{{ $s->name }}</b> ?
+                Are you sure you want to delete <b>{{ $t->name }}</b> ?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a href="{{ URL::to('/admin-student-delete/'.$s->id) }}" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#adminStudentDeleteModal">Delete</a>
+                <a href="{{ URL::to('/admin-team-delete/'.$t->id) }}" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#adminTeamDeleteModal">Delete</a>
               </div>
             </div>
           </div>
         </div>
         <div class="comment_golf_course admin_user_top">
-          <img src="{{ asset('image/'.$s->image) }}" alt="{{$s->name}}">
-          <p class="mb0">Name: {{$s->name}}</p>
+          <p class="mb0">Team Name: {{$t->name}}</p>
         </div>
+        @php
+        $team_member = DB::table('team__members')->where('team_id', '=', $t->id)->get();
+        $i = 0;
+        @endphp
+        @foreach($team_member as $tm)
+        @php
+        $s = DB::table('students')->where('id', '=', $tm->student_id)->first();
+        $i++;
+        @endphp
         <div class="comment_body admin_user_body">
-          <div>
-            <p>Student ID: {{$s->student_id}}</p>
-            <p>Email: {{$s->email}}</p>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Team Member {{$i}}</h5>
+              <h6 class="card-subtitle mb-2">{{$s->name}}</h6>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <p>ID: {{$s->student_id}}</p>
+                  </div>
+                  <div class="col-md-6">
+                    <p>Email: {{$s->email}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <p>Batch: {{$s->batch}}</p>
+                  </div>
+                  <div class="col-md-6">
+                    <p>Current Semester: {{$s->current_semester}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <p>Admission date: {{$s->year_of_admission}}</p>
-            <p>Batch: {{$s->batch}}</p>
-          </div>
-          <div>
-            <p>Gender: {{$s->gender}}</p>
-            <p>Contact No: {{$s->mobile}}</p>
-          </div>
-          <div>
-            <p>Project Supervised: 3</p>
-            <p>Session assigned: 5</p>
-          </div>
-          <p><a href="{{ URL::to('/admin-student-details/'.$s->id) }}" class="input_button button_link user_search_button"><i class="fas fa-info-circle"></i> More details</a></p>
         </div>
+        @endforeach
+
+
       </div>
       @endforeach
       @else
       <p>No data found</p>
       @endif
     </div>
-  </div>
 </section>

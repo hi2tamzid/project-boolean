@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use App\Models\Admin;
 use App\Models\Student;
@@ -191,12 +192,16 @@ class AdminController extends Controller
         return view('pages.adminstudentDetails', compact('student'));
     }
 
+    // Project Controller
+
 
     public function project()
     {
         $project = Project::all();
-        return view('pages.adminprojectPanel', compact('project'));
+        return view('pages.adminProjectPanel', compact('project'));
     }
+
+    // Session Controller
 
     public function session()
     {
@@ -233,6 +238,11 @@ class AdminController extends Controller
     public function team()
     {
         $team = Team::all();
+        // dd($team[0]->id);
+        // $team_member = Team_Member::where('team_id', '=', $team[0]->id)->get();
+        // $team_member =  DB::table('team__members')->where('team_id', '=', $team[1]->id)->get();
+        // dd($team_member[0]->student_id.$team_member[1]->student_id);
+        // dd($team_member[1]->student_id);
         return view('pages.adminTeamPanel', compact('team'));
     }
 
@@ -270,5 +280,12 @@ class AdminController extends Controller
             $obj->save();
         }
         return redirect()->to('/admin-team-register2')->with('msg', 'Team  successfully created');
+    }
+
+    public function teamDelete($id)
+    {
+        $obj = Team::find($id);
+        $obj->delete();
+        return redirect()->to('/admin-team')->with('msg', 'Session  successfully deleted');
     }
 }
