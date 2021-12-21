@@ -30,6 +30,7 @@
       @if(!$supervisors->isEmpty())
       @foreach($supervisors as $s)
       <div class="comment_item">
+      <span class="badge {{ $s->is_acc_open ? 'bg-primary': 'bg-danger'}}">{{ $s->is_acc_open ? 'Open': 'Closed'}}</span>
         <div class="comment_operation">
           <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminSupervisorDeleteModal{{ $s->id }}"><i class="far fa-trash-alt"></i> Delete Account</a></p>
         </div>
@@ -65,8 +66,11 @@
             <p>Contact No: {{$s->mobile}}</p>
           </div>
           <div>
-            <p>Project Supervised: 3</p>
-            <p>Session assigned: 5</p>
+            @php
+            $project_supervised = DB::table('project__supervisors')->where('supervisor_id', '=', $s->id)->count();
+
+            @endphp
+            <p>Project Supervised: {{$project_supervised}}</p>
           </div>
           <p><a href="{{ URL::to('/admin-supervisor-details/'.$s->id) }}" class="input_button button_link user_search_button"><i class="fas fa-info-circle"></i> More details</a></p>
         </div>

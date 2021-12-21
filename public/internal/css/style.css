@@ -3,7 +3,9 @@
 .err{
   color: #ff0000;
 }
-
+.bold-text{
+  font-weight: 700;
+}
 .inputLabel{
   font-size: var(--label-fontsize);
 }
@@ -415,6 +417,14 @@
 
 .back_button:hover{
   color: #fff;
+}
+
+/* ================================ */
+/* Admin Control Panel - Supervisor */
+/* ================================ */
+
+.supervisor_details{
+  font-size: 1.4rem;
 }
 
 /* ################## */

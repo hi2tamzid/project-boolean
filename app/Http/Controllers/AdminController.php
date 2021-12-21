@@ -83,10 +83,7 @@ class AdminController extends Controller
     public function supervisor()
     {
         $supervisors = Supervisor::all();
-        $project_supervisor = Project_Supervisor::groupBy('supervisor_id')
-            ->count();
-        // dd($project_supervisor);
-        return view('pages.adminSupervisorPanel', compact('supervisors', 'project_supervisor'));
+        return view('pages.adminSupervisorPanel', compact('supervisors'));
     }
     public function supervisorRegister()
     {
@@ -128,8 +125,8 @@ class AdminController extends Controller
     }
     public function supervisorDetails($id)
     {
-        $supervisor = Supervisor::find($id);
-        return view('pages.adminSupervisorDetails', compact('supervisor'));
+        $s = Supervisor::find($id);
+        return view('pages.adminSupervisorDetails', compact('s'));
     }
 
     // Student Controllers
