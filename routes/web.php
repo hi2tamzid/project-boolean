@@ -50,6 +50,10 @@ Route::group(['middleware' => 'IsAdminIn'], function () {
 
   // Admin project
   Route::get('/admin-project', [AdminController::class, 'project']);
+  Route::get('/admin-project-register', [AdminController::class, 'projectRegister']);
+  Route::post('/admin-project-register', [AdminController::class, 'projectRegisterSubmit']);
+  Route::get('/admin-project-delete/{id}', [AdminController::class, 'projectDelete']);
+  Route::get('/admin-project-details/{id}', [AdminController::class, 'projectDetails']);
 
   // Admin Session
   Route::get('/admin-session', [AdminController::class, 'session']);

@@ -29,9 +29,21 @@
     <div class="comment_main_section">
       @if(!$project->isEmpty())
       @foreach($project as $p)
+      @php
+
+      $project__supervisors = DB::table('project__supervisors')->where('id', '=', $p->id)->first();
+      $supervisor = DB::table('supervisors')->where('id', '=', $project__supervisors->supervisor_id)->first();
+
+      $team__projects = DB::table('team__projects')->where('id', '=', $p->id)->first();
+      $team = DB::table('teams')->where('id', '=', $team__projects->team_id)->first();
+      $team__members = DB::table('team__members')->where('team_id', '=', $team->id)->get();
+
+      $project__sessions = DB::table('project__sessions')->where('id', '=', $p->id)->first();
+      $sessions = DB::table('sessions')->where('id', '=', $project__sessions->session_id)->first();
+      @endphp
       <div class="comment_item">
         <div class="comment_operation">
-          <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminProjectDeleteModal{{ $t->id }}"><i class="far fa-trash-alt"></i> Delete Project</a></p>
+          <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminProjectDeleteModal{{ $p->id }}"><i class="far fa-trash-alt"></i> Delete Project</a></p>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="adminProjectDeleteModal{{ $p->id }}" tabindex="-1" aria-labelledby="adminProjectDeleteModalLabel" aria-hidden="true">
@@ -52,45 +64,68 @@
           </div>
         </div>
         <div class="comment_golf_course admin_user_top">
-          <p class="mb0">Team Name: {{$t->name}}</p>
+          <p class="mb0">Project Name: {{$p->name}}</p>
         </div>
-        @php
-        $team_member = DB::table('team__members')->where('team_id', '=', $t->id)->get();
-        $i = 0;
-        @endphp
-        @foreach($team_member as $tm)
-        @php
-        $s = DB::table('students')->where('id', '=', $tm->student_id)->first();
-        $i++;
-        @endphp
-        <div class="comment_body admin_user_body">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Team Member {{$i}}</h5>
-              <h6 class="card-subtitle mb-2">{{$s->name}}</h6>
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-6">
-                    <p>ID: {{$s->student_id}}</p>
-                  </div>
-                  <div class="col-md-6">
-                    <p>Email: {{$s->email}}</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <p>Batch: {{$s->batch}}</p>
-                  </div>
-                  <div class="col-md-6">
-                    <p>Current Semester: {{$s->current_semester}}</p>
+        <div class="comment_golf_course admin_user_top">
+          <p class="mb0">Type: {{$p->type}}</p>
+        </div>
+        <div class="comment_body">
+          <div class="container">
+            <div class="row mb-4">
+              <div class="col-12">
+                <div class="card">
+                <h5 class="card-header">Description</h5>
+                  <div class="card-body">
+                    <p class="card-text">{{$p->description}}</p>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p>Project starting time: {{$p->start_time}}</p>
+              </div>
+              <div class="col-md-6">
+                <p>Project ending time: {{$p->end_time}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p>Remark: {{$s->remark ?? '0'}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p>Supervisor: {{$supervisor->name}}</p>
+              </div>
+              <div class="col-md-6">
+                <p>Session: {{$sessions->name}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Team Name: {{$team->name}}</h5>
+              <div class="container">
+                @php
+                $i = 0;
+                @endphp
+                @foreach($team__members as $tm)
+                @php
+                $s = DB::table('students')->where('id', '=', $tm->student_id)->first();
+
+                $i++;
+                @endphp
+                <div class="row">
+                  <div class="col-md-6">
+                    <p>Team Member {{$i}}: {{$s->name}}</p>
+                  </div>
+                </div>
+                @endforeach
+              </div>
+            </div>
           </div>
         </div>
-        @endforeach
-
 
       </div>
       @endforeach

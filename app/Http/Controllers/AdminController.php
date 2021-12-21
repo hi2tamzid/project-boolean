@@ -14,6 +14,8 @@ use App\Models\Session;
 use App\Models\Team;
 use App\Models\Project_Supervisor;
 use App\Models\Team_Member;
+use App\Models\Team_Project;
+use App\Models\Project_Session;
 
 class AdminController extends Controller
 {
@@ -198,7 +200,67 @@ class AdminController extends Controller
     public function project()
     {
         $project = Project::all();
+        
         return view('pages.adminProjectPanel', compact('project'));
+    }
+    public function projectRegister()
+    {
+        $supervisors  = Supervisor::all();
+        $teams = Team::all();
+        $sessions = Session::all();
+        return view('pages.adminProjectRegister', compact('supervisors', 'teams', 'sessions'));
+    }
+    public function projectRegisterSubmit(Request $r)
+    {
+        $validated = $r->validate([
+            'name' => 'required',
+            'type' => [
+                'required',
+                Rule::in(['Advanced Database design', 'Neural Network & Fuzzy Logic', 'Machine Learning', 'Pattern Recognition', 'Parallel & Distributed Computing', 'VLSI Design', 'Digital Signal Processing', 'Deep Learning'])
+            ],
+            'start_time' => 'required|date',
+            'end_time' => 'after_or_equal:start_time',
+            'supervisor_id' => 'required|exists:App\Models\Supervisor,id',
+            'team_id' => 'required|exists:App\Models\Team,id',
+            'session_id' => 'required|exists:App\Models\Session,id'
+        ]);
+
+        $obj = new Project();
+
+        $obj->name = $r->name;
+        $obj->type = $r->type;
+        $obj->description = $r->description;
+        $obj->start_time = $r->start_time;
+        $obj->end_time = $r->end_time;
+
+        $obj->save();
+
+        $project_last_id = Project::latest()->first()->id;
+
+        $obj = new Project_Supervisor();
+        $obj->project_id = $project_last_id;
+        $obj->supervisor_id = $r->supervisor_id;
+        $obj->save();
+
+        $obj = new Team_Project();
+        $obj->project_id = $project_last_id;
+        $obj->team_id = $r->team_id;
+        $obj->save();
+
+        $obj = new Project_Session();
+        $obj->project_id = $project_last_id;
+        $obj->session_id = $r->session_id;
+        $obj->save();
+
+
+        return redirect()->to('/admin-project-register')->with('msg', 'Registration  Successful');
+    }
+
+    public function projectDelete($id)
+    {
+        $obj = Project::find($id);
+        $obj->delete();
+        return redirect()->to('/admin-delete')->with('msg', 'Project  successfully deleted');
     }
 
     // Session Controller
