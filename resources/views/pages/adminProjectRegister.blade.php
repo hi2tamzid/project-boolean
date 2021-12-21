@@ -60,7 +60,7 @@
   <div class="row">
     <div class="col-md-6">
       <div class="mb-3">
-        <label for="start_time" class="form-label">Start date</label><br>
+        <label for="start_time" class="form-label">Starting date</label><br>
         <input name="start_time" value="{{ old('start_time') }}" type="date" class="form-control" aria-label="start_time" aria-describedby="start_time" required>
       </div>
       @if($errors->has('start_time'))
@@ -69,7 +69,7 @@
     </div>
     <div class="col-md-6">
       <div class="mb-3">
-        <label for="end_time" class="form-label">End date</label><br>
+        <label for="end_time" class="form-label">Submission date</label><br>
         <input name="end_time" value="{{ old('end_time') }}" type="date" class="form-control" aria-label="end_time" aria-describedby="end_time" required>
       </div>
       @if($errors->has('end_time'))

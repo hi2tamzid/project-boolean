@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Carbon\Carbon;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use App\Models\Project_Supervisor;
 use App\Models\Team_Member;
 use App\Models\Team_Project;
 use App\Models\Project_Session;
+use App\Models\Student_Mark;
 
 class AdminController extends Controller
 {
@@ -80,6 +82,9 @@ class AdminController extends Controller
         $request->session()->forget('admin_login_id');
         return redirect()->to('/login-admin');
     }
+
+    // Supervisor Controller
+
     public function supervisor()
     {
         $supervisors = Supervisor::all();
@@ -198,6 +203,8 @@ class AdminController extends Controller
     {
         $project = Project::all();
 
+        
+
         return view('pages.adminProjectPanel', compact('project'));
     }
     public function projectRegister()
@@ -217,7 +224,7 @@ class AdminController extends Controller
                 'required',
                 Rule::in(['Advanced Database design', 'Neural Network & Fuzzy Logic', 'Machine Learning', 'Pattern Recognition', 'Parallel & Distributed Computing', 'VLSI Design', 'Digital Signal Processing', 'Deep Learning'])
             ],
-            'start_time' => 'required|date|after_or_equal:'.$mytime,
+            'start_time' => 'required|date|after_or_equal:' . $mytime,
             'end_time' => 'after_or_equal:start_time',
             'supervisor_id' => 'required|exists:App\Models\Supervisor,id',
             'team_id' => 'required|exists:App\Models\Team,id',
@@ -260,6 +267,59 @@ class AdminController extends Controller
         $obj = Project::find($id);
         $obj->delete();
         return redirect()->to('/admin-delete')->with('msg', 'Project  successfully deleted');
+    }
+
+    public function projectDetails($id)
+    {
+        $p = Project::find($id);
+        return view('pages.adminProjectDetails', compact('p'));
+    }
+    public function projectMark($id)
+    {
+        $p = Project::find($id);
+
+        return view('pages.adminProjectMarks', compact('p'));
+    }
+    public function projectMarkSubmit(Request $r)
+    {
+        
+
+        $team__projects = DB::table('team__projects')->where('project_id', '=', $r->p_id)->first();
+        $project__sessions = DB::table('project__sessions')->where('project_id', '=', $r->p_id)->first();
+        $team = DB::table('teams')->where('id', '=', $team__projects->team_id)->first();
+        $team__members = DB::table('team__members')->where('team_id', '=', $team->id)->get();
+        $team__members_count = DB::table('team__members')->where('team_id', '=', $team->id)->count();
+
+        for ($i = 1; $i <= $team__members_count; $i++) {
+            $validated = $r->validate([
+                'class_attendence'.$i => 'required|between:0,10',
+                'class_performance'.$i => 'required|between:0,10',
+                'report'.$i => 'required|between:0,20',
+                'viva'.$i => 'required|between:0,10',
+                'final_exam'.$i => 'required|between:0,50'
+            ]);
+            
+            $obj = new Student_Mark();
+            $obj->student_id = $r->{'s_id'.$i};
+            $obj->session_id = $project__sessions->session_id;
+            $obj->project_id = $r->p_id;
+            $obj->team_id = $team__projects->team_id;
+            $obj->class_attendence = $r->{'class_attendence'.$i};
+            $obj->class_performance = $r->{'class_performance'.$i};
+            $obj->report = $r->{'report'.$i};
+            $obj->viva = $r->{'viva'.$i};
+            $obj->final_exam = $r->{'final_exam'.$i};
+            $obj->save();
+        }
+        return redirect()->to('/admin-project')->with('msg', 'Marks entry  Successful');
+
+    }
+
+    public function projectMarkSave()
+    {
+        $project = Project::all();
+
+        return view('pages.adminProjectPanel', compact('project'));
     }
 
     // Session Controller

@@ -54,6 +54,9 @@ Route::group(['middleware' => 'IsAdminIn'], function () {
   Route::post('/admin-project-register', [AdminController::class, 'projectRegisterSubmit']);
   Route::get('/admin-project-delete/{id}', [AdminController::class, 'projectDelete']);
   Route::get('/admin-project-details/{id}', [AdminController::class, 'projectDetails']);
+  Route::get('/admin-project-mark/{id}', [AdminController::class, 'projectMark']);
+  Route::post('/admin-project-mark', [AdminController::class, 'projectMarkSubmit']);
+  Route::get('/admin-project-mark', [AdminController::class, 'projectMarkSave']);
 
   // Admin Session
   Route::get('/admin-session', [AdminController::class, 'session']);
@@ -61,7 +64,7 @@ Route::group(['middleware' => 'IsAdminIn'], function () {
   Route::post('/admin-session-register', [AdminController::class, 'sessionRegisterSubmit']);
   Route::get('/admin-session-delete/{id}', [AdminController::class, 'sessionDelete']);
 
-  // Admin Session
+  // Admin Team
   Route::get('/admin-team', [AdminController::class, 'team']);
   Route::get('/admin-team-register', [AdminController::class, 'teamRegister']);
   Route::post('/admin-team-register', [AdminController::class, 'teamRegisterSubmit']);

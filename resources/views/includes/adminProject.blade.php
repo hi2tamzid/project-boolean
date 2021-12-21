@@ -107,96 +107,26 @@
               </div>
 
             </div>
-            <div class="row mb-4">
-              <div class="col-12">
-                <div class="card">
-                  <h5 class="card-header">Team Name: {{$team->name}}</h5>
-                  <div class="card-body">
-                    <div class="col-8 table-responsive">
-                      <table class="table table-striped border border-light">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Team Members</th>
-                            <th scope="col">Student ID</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          @php
-                          $i = 0;
-                          @endphp
-                          @foreach($team__members as $tm)
-                          @php
-                          $s = DB::table('students')->where('id', '=', $tm->student_id)->first();
 
-                          $i++;
-                          @endphp
-                          <tr>
-                            <td>{{$i}}</td>
-                            <td>{{$s->name}}</td>
-                            <td>{{$s->student_id}}</td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-10 table-responsive">
 
-              @php
-              $student_results = DB::table('student__marks')->where('project_id', '=', $p->id)->get();
-              @endphp
-              <table class="table table-striped border-primary">
-                <thead>
-                  <tr>
-                    <th scope="col">Student No</th>
-                    <th scope="col">Name of Students</th>
-                    <th scope="col" colspan="7" class="text">Marks Obtained</th>
-                    <th scope="col" rowspan="2">Grade obtained</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Class Attendence</td>
-                    <td>Home Works(10%)</td>
-                    <td>Class Test(10%)</td>
-                    <td>Mid Term(20%)</td>
-                    <td>Total(50%)(Up to Midterm)</td>
-                    <td>Final Exam(50%)</td>
-                    <td>Total(100%)</td>
-                  </tr>
-                  <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <p><a href="{{ URL::to('/admin-project-details/'.$p->id) }}" class="input_button button_link user_search_button"><i class="fas fa-info-circle"></i> More details</a></p>
+        @php
+        $is_project_graded = DB::table('student__marks')->where('project_id', '=',$p->id)->count();
+        @endphp
+        @if($is_project_graded)
+        <p><a href="{{ URL::to('/admin-project-mark-update/'.$p->id) }}" class="btn btn-success"><i class="fas fa-poll-h"></i>  Edit marks</a></p>
+        @else
+        <p><a href="{{ URL::to('/admin-project-mark/'.$p->id) }}" class="btn btn-success"><i class="fas fa-poll-h"></i>  Provide marks</a></p>
+        @endif
+        
 
       </div>
       @endforeach
       @else
       <p>No data found</p>
       @endif
+    </div>
 </section>
