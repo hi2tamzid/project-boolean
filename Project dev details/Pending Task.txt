@@ -2,5 +2,12 @@ make image upload function global
 search user in students & supervisors
 retrive softdelete 
 update operation
+make it responsive
+no value means not defined
+details needed
+update needed
+search & filter
+Page to show all students of a semester+batch+session & give option to provide marks
 
 Some validation(date format)
+

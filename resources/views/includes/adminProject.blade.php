@@ -64,67 +64,86 @@
           </div>
         </div>
         <div class="comment_golf_course admin_user_top">
-          <p class="mb0">Project Name: {{$p->name}}</p>
+          <h2>Project Name: {{$p->name}}</h2>
         </div>
         <div class="comment_golf_course admin_user_top">
-          <p class="mb0">Type: {{$p->type}}</p>
+          <p class="display-3">Type: {{$p->type}}</p>
         </div>
         <div class="comment_body">
           <div class="container">
             <div class="row mb-4">
               <div class="col-12">
                 <div class="card">
-                <h5 class="card-header">Description</h5>
+                  <h5 class="card-header">Description</h5>
                   <div class="card-body">
                     <p class="card-text">{{$p->description}}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Project starting time: {{$p->start_time}}</p>
-              </div>
-              <div class="col-md-6">
-                <p>Project ending time: {{$p->end_time}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Remark: {{$s->remark ?? '0'}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Supervisor: {{$supervisor->name}}</p>
-              </div>
-              <div class="col-md-6">
-                <p>Session: {{$sessions->name}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Team Name: {{$team->name}}</h5>
-              <div class="container">
-                @php
-                $i = 0;
-                @endphp
-                @foreach($team__members as $tm)
-                @php
-                $s = DB::table('students')->where('id', '=', $tm->student_id)->first();
 
-                $i++;
-                @endphp
-                <div class="row">
-                  <div class="col-md-6">
-                    <p>Team Member {{$i}}: {{$s->name}}</p>
+            <div class="row mb-4">
+              <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Supervisor</th>
+                      <th scope="col">Session</th>
+                      <th scope="col">Starting time</th>
+                      <th scope="col">Deadline</th>
+                      <th scope="col">Remark</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">{{$supervisor->name}}</th>
+                      <td>{{$sessions->name}}</td>
+                      <td>{{$p->start_time}}</td>
+                      <td>{{$p->end_time}}</td>
+                      <td>{{$s->remark ?? '0'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+            <div class="row mb-4">
+              <div class="col-12">
+                <div class="card">
+                  <h5 class="card-header">Team Name: {{$team->name}}</h5>
+                  <div class="card-body">
+                    <div class="col-7 table-responsive">
+                      <table class="table table-striped border border-light">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Team Members</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @php
+                          $i = 0;
+                          @endphp
+                          @foreach($team__members as $tm)
+                          @php
+                          $s = DB::table('students')->where('id', '=', $tm->student_id)->first();
+
+                          $i++;
+                          @endphp
+                          <tr>
+                            <td>{{$i}}</td>
+                            <td>{{$s->name}}</td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
-                @endforeach
               </div>
             </div>
           </div>
+
         </div>
 
       </div>
@@ -132,5 +151,4 @@
       @else
       <p>No data found</p>
       @endif
-    </div>
 </section>

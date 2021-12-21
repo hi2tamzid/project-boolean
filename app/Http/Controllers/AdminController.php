@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,8 +28,8 @@ class AdminController extends Controller
     {
         $validated = $r->validate([
             'login_id' => 'required|unique:App\Models\Admin,login_id',
-            'password' => ['required', Password::min(6)]// Require  at least 6 characters...
-            
+            'password' => ['required', Password::min(6)] // Require  at least 6 characters...
+
         ]);
         $obj = new Admin();
         $obj->login_id = $r->login_id;
@@ -84,7 +84,7 @@ class AdminController extends Controller
     {
         $supervisors = Supervisor::all();
         $project_supervisor = Project_Supervisor::groupBy('supervisor_id')
-               ->count();
+            ->count();
         // dd($project_supervisor);
         return view('pages.adminSupervisorPanel', compact('supervisors', 'project_supervisor'));
     }
@@ -96,7 +96,7 @@ class AdminController extends Controller
     {
         $validated = $r->validate([
             'login_id' => 'required|unique:App\Models\Supervisor,login_id',
-            'password' => ['required', Password::min(6)->letters()],// Require at least one letter and  at least 6 characters...
+            'password' => ['required', Password::min(6)->letters()], // Require at least one letter and  at least 6 characters...
             'name' => 'required',
             'email' => 'required|email|unique:App\Models\Supervisor,email',
             'gender' => [
@@ -114,7 +114,7 @@ class AdminController extends Controller
         $obj->email = $r->email;
         $obj->gender = $r->gender;
         $obj->mobile = $r->mobile;
-        if($r->has('image'))
+        if ($r->has('image'))
             $obj->image = $obj->imageUpload($r);
         $obj->save();
 
@@ -131,9 +131,9 @@ class AdminController extends Controller
         $supervisor = Supervisor::find($id);
         return view('pages.adminSupervisorDetails', compact('supervisor'));
     }
-    
+
     // Student Controllers
-    
+
     public function student()
     {
         $student = Student::all();
@@ -148,7 +148,7 @@ class AdminController extends Controller
     {
         $validated = $r->validate([
             'student_id' => 'required|unique:App\Models\Student,student_id',
-            'password' => ['required', Password::min(6)->letters()],// Require at least one letter and  at least 6 characters...
+            'password' => ['required', Password::min(6)->letters()], // Require at least one letter and  at least 6 characters...
             'name' => 'required',
             'email' => 'required|email|unique:App\Models\Student,email',
             'gender' => [
@@ -176,7 +176,7 @@ class AdminController extends Controller
         $obj->year_of_admission = $r->year_of_admission;
         $obj->current_semester = $r->current_semester;
         $obj->batch = $r->batch;
-        if($r->has('image'))
+        if ($r->has('image'))
             $obj->image = $imgProcess->imageUpload($r);
         $obj->save();
 
@@ -200,7 +200,7 @@ class AdminController extends Controller
     public function project()
     {
         $project = Project::all();
-        
+
         return view('pages.adminProjectPanel', compact('project'));
     }
     public function projectRegister()
@@ -212,13 +212,15 @@ class AdminController extends Controller
     }
     public function projectRegisterSubmit(Request $r)
     {
+        $mytime = Carbon::now();
+        $mytime = $mytime->toDateString();
         $validated = $r->validate([
             'name' => 'required',
             'type' => [
                 'required',
                 Rule::in(['Advanced Database design', 'Neural Network & Fuzzy Logic', 'Machine Learning', 'Pattern Recognition', 'Parallel & Distributed Computing', 'VLSI Design', 'Digital Signal Processing', 'Deep Learning'])
             ],
-            'start_time' => 'required|date',
+            'start_time' => 'required|date|after_or_equal:'.$mytime,
             'end_time' => 'after_or_equal:start_time',
             'supervisor_id' => 'required|exists:App\Models\Supervisor,id',
             'team_id' => 'required|exists:App\Models\Team,id',
@@ -310,7 +312,7 @@ class AdminController extends Controller
 
     public function teamRegister()
     {
-        
+
         return view('pages.adminTeamRegister');
     }
     public function teamRegisterSubmit(Request $r)
@@ -323,7 +325,7 @@ class AdminController extends Controller
         $obj = new Team();
         $obj->name = $r->name;
         $obj->member_number = $r->member_number;
-        
+
         $obj->save();
         $curr_id = Team::latest()->first()->id;
         $member_number = $obj->member_number;
@@ -334,11 +336,10 @@ class AdminController extends Controller
     }
     public function teamRegisterSubmit2(Request $r)
     {
-        for($i = 1 ; $i <= $r->member_number ; $i++)
-        {
+        for ($i = 1; $i <= $r->member_number; $i++) {
             $obj = new Team_Member();
             $obj->team_id = $r->curr_id;
-            $obj->student_id = $r->{'member'.$i};
+            $obj->student_id = $r->{'member' . $i};
             $obj->save();
         }
         return redirect()->to('/admin-team-register2')->with('msg', 'Team  successfully created');
