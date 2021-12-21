@@ -92,8 +92,22 @@ class AdminController extends Controller
     }
     public function supervisorEdit($id)
     {
-        $supervisors = Supervisor::find($id);
-        return view('pages.adminSupervisorEdit', compact('supervisors'));
+        $s = Supervisor::find($id);
+        return view('pages.adminSupervisorEdit', compact('s'));
+    }
+    public function supervisorUpdate(Request $r, $id) {
+        
+        $obj = Supervisor::find($id);
+        $obj->login_id = $r->login_id;
+        $obj->password = $r->password;
+        $obj->name = $r->name;
+        $obj->email = $r->email;
+        $obj->gender = $r->gender;
+        $obj->mobile = $r->mobile;
+        if ($r->has('image'))
+            $obj->image = $obj->imageUpload($r);
+        $obj->save();
+        return redirect()->back()->with('msg', 'Updated Successfully'); // only once
     }
     public function supervisorRegister()
     {
@@ -145,6 +159,30 @@ class AdminController extends Controller
     {
         $student = Student::all();
         return view('pages.adminStudentPanel', compact('student'));
+    }
+
+    public function studentEdit($id)
+    {
+        $s = Student::find($id);
+        return view('pages.adminStudentEdit', compact('s'));
+    }
+    public function studentUpdate(Request $r, $id) {
+        
+        $obj = Student::find($id);
+        $imgProcess = new Supervisor();
+        $obj->student_id = $r->student_id;
+        $obj->password = $r->password;
+        $obj->name = $r->name;
+        $obj->email = $r->email;
+        $obj->gender = $r->gender;
+        $obj->mobile = $r->mobile;
+        $obj->year_of_admission = $r->year_of_admission;
+        $obj->current_semester = $r->current_semester;
+        $obj->batch = $r->batch;
+        if ($r->has('image'))
+            $obj->image = $imgProcess->imageUpload($r);
+        $obj->save();
+        return redirect()->back()->with('msg', 'Updated Successfully'); // only once
     }
 
     public function studentRegister()

@@ -31,6 +31,7 @@
       @foreach($student as $s)
       <div class="comment_item">
         <div class="comment_operation">
+          <p><a href="" class="input_button comment_operation_edit" ><i class="far fa-trash-alt"></i> Delete Account</a></p>
           <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminStudentDeleteModal{{ $s->id }}"><i class="far fa-trash-alt"></i> Delete Account</a></p>
         </div>
         <!-- Modal -->
