@@ -69,8 +69,10 @@
             <p>Contact No: {{$s->mobile}}</p>
           </div>
           <div>
-            <p>Project Supervised: 3</p>
-            <p>Session assigned: 5</p>
+            @php
+            
+            @enphp
+            <p>Project attempted: 3</p>
           </div>
           <p><a href="{{ URL::to('/admin-student-details/'.$s->id) }}" class="input_button button_link user_search_button"><i class="fas fa-info-circle"></i> More details</a></p>
         </div>

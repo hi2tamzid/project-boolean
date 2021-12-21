@@ -90,6 +90,11 @@ class AdminController extends Controller
         $supervisors = Supervisor::all();
         return view('pages.adminSupervisorPanel', compact('supervisors'));
     }
+    public function supervisorEdit($id)
+    {
+        $supervisors = Supervisor::find($id);
+        return view('pages.adminSupervisorEdit', compact('supervisors'));
+    }
     public function supervisorRegister()
     {
         return view('pages.adminSupervisorRegister');
@@ -192,8 +197,8 @@ class AdminController extends Controller
     }
     public function studentDetails($id)
     {
-        $student = Student::find($id);
-        return view('pages.adminstudentDetails', compact('student'));
+        $s = Student::find($id);
+        return view('pages.adminstudentDetails', compact('s'));
     }
 
     // Project Controller
