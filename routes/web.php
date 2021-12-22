@@ -24,6 +24,8 @@ Route::group(['middleware' => 'IsLoggedIn'], function () {
   Route::get('/register', [HomeController::class, 'register']);
 });
 
+Route::get('/supervisor-login', [AdminController::class, 'supervisorLoginpage']);
+Route::post('/supervisor-login', [AdminController::class, 'supervisorLogin']);
 // Admin
 Route::get('/register-admin', [AdminController::class, 'registerAdmin']);
 Route::post('/store-admin', [AdminController::class, 'storeAdmin']);
@@ -45,7 +47,7 @@ Route::group(['middleware' => 'IsAdminIn'], function () {
 
   // Admin student
   Route::get('/admin-student', [AdminController::class, 'student']);
-  Route::get('/admin-student-edit', [AdminController::class, 'studentEdit']);
+  Route::get('/admin-student-edit/{id}', [AdminController::class, 'studentEdit']);
   Route::post('/admin-student-update/{id}', [AdminController::class, 'studentUpdate']);
   Route::get('/admin-student-register', [AdminController::class, 'studentRegister']);
   Route::post('/admin-student-register', [AdminController::class, 'studentRegisterSubmit']);
@@ -54,7 +56,7 @@ Route::group(['middleware' => 'IsAdminIn'], function () {
 
   // Admin project
   Route::get('/admin-project', [AdminController::class, 'project']);
-  Route::get('/admin-project-edit', [AdminController::class, 'projectEdit']);
+  Route::get('/admin-project-edit/{id}', [AdminController::class, 'projectEdit']);
   Route::post('/admin-project-update/{id}', [AdminController::class, 'projectUpdate']);
   Route::get('/admin-project-register', [AdminController::class, 'projectRegister']);
   Route::post('/admin-project-register', [AdminController::class, 'projectRegisterSubmit']);
@@ -66,7 +68,7 @@ Route::group(['middleware' => 'IsAdminIn'], function () {
 
   // Admin Session
   Route::get('/admin-session', [AdminController::class, 'session']);
-  Route::get('/admin-session-edit', [AdminController::class, 'sessionEdit']);
+  Route::get('/admin-session-edit/{id}', [AdminController::class, 'sessionEdit']);
   Route::post('/admin-session-update/{id}', [AdminController::class, 'sessionUpdate']);
   Route::get('/admin-session-register', [AdminController::class, 'sessionRegister']);
   Route::post('/admin-session-register', [AdminController::class, 'sessionRegisterSubmit']);
@@ -74,8 +76,9 @@ Route::group(['middleware' => 'IsAdminIn'], function () {
 
   // Admin Team
   Route::get('/admin-team', [AdminController::class, 'team']);
-  Route::get('/admin-team-edit', [AdminController::class, 'teamEdit']);
+  Route::get('/admin-team-edit/{id}', [AdminController::class, 'teamEdit']);
   Route::post('/admin-team-update/{id}', [AdminController::class, 'teamUpdate']);
+  Route::post('/admin-team-update2/{id}', [AdminController::class, 'teamUpdate2']);
   Route::get('/admin-team-register', [AdminController::class, 'teamRegister']);
   Route::post('/admin-team-register', [AdminController::class, 'teamRegisterSubmit']);
   Route::post('/admin-team-register2', [AdminController::class, 'teamRegisterSubmit2']);

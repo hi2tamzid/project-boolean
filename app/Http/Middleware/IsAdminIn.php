@@ -17,8 +17,8 @@ class IsAdminIn
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Session::has('admin_login_id')){
-            return redirect()->to('login-admin');
+        if(!Session::has('admin_login_id') && !Session::has('supervisor_login_id')){
+            return redirect()->to('/');
         }
         return $next($request);
     }

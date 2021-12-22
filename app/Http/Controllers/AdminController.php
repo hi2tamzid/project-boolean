@@ -21,6 +21,29 @@ use App\Models\Student_Mark;
 
 class AdminController extends Controller
 {
+    public function supervisorLogin(Request $r)
+    {
+        $login_id = $r->login_id;
+        $password = $r->password;
+
+        $supervisor_user = Supervisor::where('login_id', '=', $login_id)
+            ->where('password', '=', $password)
+            ->first();
+
+        if (!$supervisor_user) {
+            return redirect()->back()->with('err_msg', 'Invalid login ID or password');
+        } else {
+            // Store user data into session
+            $r->session()->put('supervisor_login_id', $supervisor_user->login_id);
+            // dd("working");
+            return redirect()->to('admin-dashboard');
+        }
+        return view('pages.homepage');
+    }
+    public function supervisorLoginpage()
+    {
+        return view('pages.supervisorLogin');
+    }
     public function registerAdmin()
     {
         return view('pages.adminregister');
@@ -79,8 +102,16 @@ class AdminController extends Controller
     }
     public function logout(Request $request)
     {
-        $request->session()->forget('admin_login_id');
-        return redirect()->to('/login-admin');
+        if(session()->has('admin_login_id'))
+        {
+            $request->session()->forget('admin_login_id');
+            return redirect()->to('/login-admin');
+        }
+        else if(session()->has('supervisor_login_id'))
+        {
+            $request->session()->forget('supervisor_login_id');
+            return redirect()->to('/');
+        }
     }
 
     // Supervisor Controller
@@ -250,6 +281,46 @@ class AdminController extends Controller
 
         return view('pages.adminProjectPanel', compact('project'));
     }
+    public function projectEdit($id)
+    {
+        $p = Project::find($id);
+        $supervisors  = Supervisor::all();
+        $teams = Team::all();
+        $sessions = Session::all();
+        return view('pages.adminProjectEdit', compact('p', 'supervisors', 'teams', 'sessions'));
+    }
+    public function projectUpdate(Request $r, $id) {
+        
+        $obj = Project::find($id);
+
+        $obj->name = $r->name;
+        $obj->type = $r->type;
+        $obj->description = $r->description;
+        $obj->start_time = $r->start_time;
+        $obj->end_time = $r->end_time;
+
+        $obj->save();
+
+        $project_last_id = $id;
+
+        $obj = Project_Supervisor::find($r->project__supervisors);
+        $obj->project_id = $project_last_id;
+        $obj->supervisor_id = $r->supervisor_id;
+        $obj->save();
+
+        $obj =  Team_Project::find($r->team__projects);
+        $obj->project_id = $project_last_id;
+        $obj->team_id = $r->team_id;
+        $obj->save();
+
+        $obj = Project_Session::find($r->project__sessions);
+        $obj->project_id = $project_last_id;
+        $obj->session_id = $r->session_id;
+        $obj->save();
+
+
+        return redirect()->back()->with('msg', 'Updated Successfully'); // only once
+    }
     public function projectRegister()
     {
         $supervisors  = Supervisor::all();
@@ -372,6 +443,19 @@ class AdminController extends Controller
         $session = Session::all();
         return view('pages.adminSessionPanel', compact('session'));
     }
+    public function sessionEdit($id)
+    {
+        $s = Session::find($id);
+        return view('pages.adminSessionEdit', compact('s'));
+    }
+    public function sessionUpdate(Request $r, $id) {
+        
+        $obj = Session::find($id);
+        $obj->name = $r->name;
+
+        $obj->save();
+        return redirect()->back()->with('msg', 'Updated Successfully'); // only once
+    }
     public function sessionRegister()
     {
         return view('pages.adminSessionRegister');
@@ -409,6 +493,35 @@ class AdminController extends Controller
         // dd($team_member[1]->student_id);
         return view('pages.adminTeamPanel', compact('team'));
     }
+    public function teamEdit($id)
+    {
+        $t = Team::find($id);
+        return view('pages.adminTeamEdit', compact('t'));
+    }
+    public function teamUpdate(Request $r, $id) {
+        
+        $obj = Team::find($id);
+        $obj->name = $r->name;
+        $obj->member_number = $r->member_number;
+
+        $obj->save();
+        $curr_id = $id;
+        $member_number = $obj->member_number;
+        // dd($curr_id);
+        $student = Student::all();
+        return view('pages.adminTeamEdit', compact('member_number', 'curr_id', 'student'));
+    }
+    public function teamUpdate2(Request $r, $id) {
+        $team__members = DB::table('team__members')->where('team_id', '=', $id)->get();
+        foreach($team__members as $tm) {
+            $obj = Team_Member::find($tm->id);
+            $obj->team_id = $r->curr_id;
+            $obj->student_id = $r->{'member' . $i};
+            $obj->save();
+        }
+        return redirect()->back()->with('msg', 'Updated Successfully'); // only once
+    }
+    
 
     public function teamRegister()
     {

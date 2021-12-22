@@ -1,0 +1,155 @@
+@extends('layouts.admin', ['controlPanelActive' => 'active'])
+@section('content')
+<h1 class="text-center mt-5 ">Control Panel - Student Update Registration</h1>
+<a href="{{ URL::to('/admin-student') }}" class="input_button button_link back_button"><i class="fas fa-arrow-left"></i> Back to
+    Student</a>
+    @if(Session::has('msg'))
+<div class="alert alert-success mt-3" role="alert">
+  <strong>{{Session::get('msg')}}</strong>
+</div>
+@endif
+@if(Session::has('err_msg'))
+<div class="alert alert-danger mt-3" role="alert">
+  {{ Session::get('err_msg') }}
+  @endif
+</div>
+<!-- @if ($errors->any())
+<div class="alert alert-danger mt-3">
+  <ul>
+    @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+  </ul>
+</div>
+@endif -->
+<form action="{{ URL::to('/admin-student-update/'.$s->id) }}" class="signup_form mt-3 mb-5" method="post" enctype="multipart/form-data">
+  {{ csrf_field() }}
+  <div class="row">
+    <div class="col-md-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="full_name">Full Name</span>
+        <input name="name" value='{{ $s->name }}' type="text" class="form-control" placeholder="Enter full name" aria-label="full_name" aria-describedby="full_name" required>
+      </div>
+      @if($errors->has('name'))
+      <span class="err">{{ $errors->first('name') }}</span>
+      @endif
+    </div>
+    <div class="col-md-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="email">Email</span>
+        <input name="email" value='{{ $s->email }}' type="email" class="form-control" placeholder="Enter email" aria-label="email" aria-describedby="email" required>
+      </div>
+      @if($errors->has('email'))
+      <span class="err">{{ $errors->first('email') }}</span>
+      @endif
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="register_student_id">Student ID</span>
+        <input name="student_id" value='{{ $s->student_id }}' type="text" class="form-control" placeholder="Enter student id" aria-label="register_student_id" aria-describedby="register_student_id" required>
+      </div>
+      @if($errors->has('student_id'))
+      <span class="err">{{ $errors->first('student_id') }}</span>
+      @endif
+    </div>
+    <div class="col-md-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="register_password">Password</span>
+        <input name="password" value='{{ $s->password }}' type="Password" class="form-control" placeholder="Enter password" aria-label="register_password" aria-describedby="register_password" required>
+      </div>
+      @if($errors->has('password'))
+      <span class="err">{{ $errors->first('password') }}</span>
+      @endif
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="gender" class="form-label">Gender</label><br>
+        <select name="gender" class="form-select" aria-label="gender">
+          <option value="male" {{ $s->gender == "male" ? "selected" : "" }}>Male</option>
+          <option value="female" {{ $s->gender == "female" ? "selected" : "" }}>Female</option>
+        </select>
+      </div>
+      @if($errors->has('gender'))
+      <span class="err">{{ $errors->first('gender') }}</span>
+      @endif
+    </div>
+    <div class="col-md-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="mobile">Mobile</span>
+        <input name="mobile" value='{{ $s->mobile }}' type="text" class="form-control" placeholder="Enter mobile no" aria-label="mobile" aria-describedby="mobile" required>
+      </div>
+      @if($errors->has('mobile'))
+      <span class="err">{{ $errors->first('mobile') }}</span>
+      @endif
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="year_of_admission" class="form-label">Admission date</label><br>
+        <input name="year_of_admission" value='{{ $s->year_of_admission }}' type="date" class="form-control" aria-label="year_of_admission" aria-describedby="year_of_admission" required>
+      </div>
+      @if($errors->has('year_of_admission'))
+      <span class="err">{{ $errors->first('year_of_admission') }}</span>
+      @endif
+    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="current_semester" class="form-label">Current Semester</label><br>
+        
+        <select name="current_semester" class="form-select" aria-label="current_semester">
+          <option value="1st" {{ $s->current_semester == "1st" ? "selected" : "" }}>1st</option>
+          <option value="2nd" {{ $s->current_semester == "2nd" ? "selected" : "" }}>2nd</option>
+          <option value="3rd" {{ $s->current_semester == "3rd" ? "selected" : "" }}>3rd</option>
+          <option value="4th" {{ $s->current_semester == "4th" ? "selected" : "" }}>4th</option>
+          <option value="5th" {{ $s->current_semester == "5th" ? "selected" : "" }}>5th</option>
+          <option value="6th" {{ $s->current_semester == "6th" ? "selected" : "" }}>6th</option>
+          <option value="7th" {{ $s->current_semester == "7th" ? "selected" : "" }}>7th</option>
+          <option value="8th" {{ $s->current_semester == "8th" ? "selected" : "" }}>8th</option>
+        </select>
+      </div>
+      @if($errors->has('current_semester'))
+      <span class="err">{{ $errors->first('current_semester') }}</span>
+      @endif
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="col-md-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="batch">Batch (in number)</span>
+        <input name="batch" value='{{ $s->batch }}' type="text" class="form-control" placeholder="Enter batch no" aria-label="batch" aria-describedby="batch" required>
+      </div>
+      @if($errors->has('batch'))
+      <span class="err">{{ $errors->first('batch') }}</span>
+      @endif
+    </div>
+    <div class="col-4">
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Profile Photo</label>
+        <input name="image" value='{{ $s->image }}' class="form-control" type="file" id="formFile">
+      </div>
+      @if($errors->has('image'))
+      <span class="err">{{ $errors->first('image') }}</span>
+      @endif
+    </div>
+    <!-- <div class="col-md-2"></div> -->
+    
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+      <button type="submit" class="btn btn-success">Update</button>
+    </div>
+  </div>
+</form>
+@endsection

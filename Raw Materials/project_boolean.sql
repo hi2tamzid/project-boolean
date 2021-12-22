@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3413
--- Generation Time: Dec 18, 2021 at 03:51 PM
+-- Generation Time: Dec 22, 2021 at 05:58 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -92,7 +92,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2021_12_09_131622_create_project__sessions_table', 1),
 (17, '2021_12_13_173435_add_image_to_supervisors_table', 2),
 (18, '2021_12_13_173456_add_image_to_students_table', 2),
-(20, '2021_12_16_130609_create_admins_table', 3);
+(20, '2021_12_16_130609_create_admins_table', 3),
+(21, '2021_12_19_132026_add_member_number_to_teams_table', 4);
 
 -- --------------------------------------------------------
 
@@ -145,6 +146,14 @@ CREATE TABLE `projects` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `name`, `type`, `description`, `progress`, `start_time`, `end_time`, `is_completed`, `remark`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Boolean', 'Advanced Database design', 'test data', 0, '2021-12-21', '2021-12-24', 0, NULL, '2021-12-21 00:11:53', '2021-12-21 00:11:53', NULL),
+(2, 'Health Check up', 'Machine Learning', 'This is a machine learning app', 0, '2021-12-21', '2021-12-23', 0, NULL, '2021-12-21 03:48:09', '2021-12-21 03:48:09', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -159,6 +168,14 @@ CREATE TABLE `project__sessions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `project__sessions`
+--
+
+INSERT INTO `project__sessions` (`id`, `project_id`, `session_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 2, '2021-12-21 00:11:53', '2021-12-21 00:11:53', NULL),
+(2, 2, 2, '2021-12-21 03:48:09', '2021-12-21 03:48:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -175,6 +192,14 @@ CREATE TABLE `project__supervisors` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `project__supervisors`
+--
+
+INSERT INTO `project__supervisors` (`id`, `project_id`, `supervisor_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 4, '2021-12-21 00:11:53', '2021-12-21 00:11:53', NULL),
+(2, 2, 4, '2021-12-21 03:48:09', '2021-12-21 03:48:09', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -188,6 +213,16 @@ CREATE TABLE `sessions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Spring 2021', '2021-12-18 23:45:09', '2021-12-18 23:47:56', '2021-12-18 23:47:56'),
+(2, 'Sprint 2021', '2021-12-18 23:50:43', '2021-12-18 23:50:43', NULL),
+(3, 'January 2020', '2021-12-18 23:50:55', '2021-12-18 23:50:55', NULL),
+(4, 'October 2020', '2021-12-18 23:51:05', '2021-12-18 23:51:05', NULL);
 
 -- --------------------------------------------------------
 
@@ -218,7 +253,10 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `student_id`, `password`, `name`, `email`, `gender`, `mobile`, `year_of_admission`, `current_semester`, `batch`, `is_graduated`, `created_at`, `updated_at`, `deleted_at`, `image`) VALUES
-(1, 1703310201389, '123456t', 'Tamzid', 'tamzidmahmud2@gmail.com', 'male', '123123123123213', '2021-12-18', '6th', 33, 1, '2021-12-18 08:39:26', '2021-12-18 08:39:26', NULL, '1639838366.jpg');
+(1, 1703310201389, '123456t', 'Tamzid', 'tamzidmahmud2@gmail.com', 'male', '123123123123213', '2021-12-18', '6th', 33, 1, '2021-12-18 08:39:26', '2021-12-18 22:35:02', '2021-12-18 22:35:02', '1639838366.jpg'),
+(2, 17033102, '123456a', 'Tamzid', 'salam@gmail.com', 'male', '01864444444', '2021-12-19', '6th', 33, 1, '2021-12-18 22:56:36', '2021-12-18 22:56:36', NULL, '1639889794.jpg'),
+(3, 123123123, '123456a', 'Tamzid 2', 'abc@test.com', 'male', '123123123123213', '2021-12-19', '6th', 33, 1, '2021-12-19 00:05:26', '2021-12-19 00:05:26', NULL, NULL),
+(4, 1703310201377, '123456a', 'Nazia Moomtahina Proma', 'naziaproma15@gmail.com', 'female', '01747000000', '2021-12-19', '6th', 33, 1, '2021-12-19 00:06:20', '2021-12-19 00:06:20', NULL, '1639893980.jpg');
 
 -- --------------------------------------------------------
 
@@ -241,6 +279,14 @@ CREATE TABLE `student__marks` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `student__marks`
+--
+
+INSERT INTO `student__marks` (`id`, `student_id`, `session_id`, `project_id`, `team_id`, `class_attendence`, `class_performance`, `report`, `viva`, `final_exam`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, 2, 1, 29, 10, 10, 10, 10, 50, '2021-12-21 14:41:08', '2021-12-21 14:41:08', NULL),
+(2, 3, 2, 1, 29, 10, 10, 10, 10, 45, '2021-12-21 14:41:08', '2021-12-21 14:41:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -284,8 +330,19 @@ CREATE TABLE `teams` (
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `member_number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `teams`
+--
+
+INSERT INTO `teams` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`, `member_number`) VALUES
+(28, 'null', '2021-12-20 07:49:30', '2021-12-20 15:45:53', '2021-12-20 15:45:53', 1),
+(29, 'Boolean', '2021-12-20 07:49:41', '2021-12-20 07:49:41', NULL, 2),
+(30, 'Project Boolean', '2021-12-20 07:50:39', '2021-12-20 07:50:39', NULL, 3),
+(31, 'Team Zero', '2021-12-21 10:53:46', '2021-12-21 10:53:46', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -302,6 +359,21 @@ CREATE TABLE `team__members` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `team__members`
+--
+
+INSERT INTO `team__members` (`id`, `team_id`, `student_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(3, 28, 2, '2021-12-20 07:49:34', '2021-12-20 07:49:34', NULL),
+(4, 29, 2, '2021-12-20 07:49:45', '2021-12-20 07:49:45', NULL),
+(5, 29, 3, '2021-12-20 07:49:45', '2021-12-20 07:49:45', NULL),
+(6, 30, 2, '2021-12-20 07:50:45', '2021-12-20 07:50:45', NULL),
+(7, 30, 3, '2021-12-20 07:50:45', '2021-12-20 07:50:45', NULL),
+(8, 30, 4, '2021-12-20 07:50:45', '2021-12-20 07:50:45', NULL),
+(9, 31, 2, '2021-12-21 10:56:42', '2021-12-21 10:56:42', NULL),
+(10, 31, 3, '2021-12-21 10:56:43', '2021-12-21 10:56:43', NULL),
+(11, 31, 4, '2021-12-21 10:56:43', '2021-12-21 10:56:43', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -316,6 +388,14 @@ CREATE TABLE `team__projects` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `team__projects`
+--
+
+INSERT INTO `team__projects` (`id`, `project_id`, `team_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 29, '2021-12-21 00:11:53', '2021-12-21 00:11:53', NULL),
+(2, 2, 30, '2021-12-21 03:48:09', '2021-12-21 03:48:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -470,7 +550,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -482,37 +562,37 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `project__sessions`
 --
 ALTER TABLE `project__sessions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `project__supervisors`
 --
 ALTER TABLE `project__supervisors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `student__marks`
 --
 ALTER TABLE `student__marks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `supervisors`
@@ -524,19 +604,19 @@ ALTER TABLE `supervisors`
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `team__members`
 --
 ALTER TABLE `team__members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `team__projects`
 --
 ALTER TABLE `team__projects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -5,7 +5,9 @@
 <div class="container mt-5 admin_dash">
   <div class="row justify-content-center">
     <div class="col-12 col-md-5 admin_dash_1">
+      @if(Session::has('admin_login_id'))
       <p>Supervisors: {{ $supervisors }}</p>
+      @endif
       <p>Students: {{ $students }}</p>
       <p>Sessions: {{ $sessions }}</p>
     </div>

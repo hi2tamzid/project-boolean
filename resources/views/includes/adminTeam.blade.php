@@ -31,7 +31,8 @@
       @foreach($team as $t)
       <div class="comment_item">
         <div class="comment_operation">
-          <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminTeamDeleteModal{{ $t->id }}"><i class="far fa-trash-alt"></i> Delete Team</a></p>
+        <p><a href="{{ URL::to('/admin-team-edit/'.$t->id) }}" class="input_button comment_operation_edit" ><i class="fas fa-edit"></i> Edit</a></p>
+          <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminTeamDeleteModal{{ $t->id }}"><i class="far fa-trash-alt"></i> Delete</a></p>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="adminTeamDeleteModal{{ $t->id }}" tabindex="-1" aria-labelledby="adminTeamDeleteModalLabel" aria-hidden="true">

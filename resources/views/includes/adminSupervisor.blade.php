@@ -32,8 +32,8 @@
       <div class="comment_item">
       <span class="badge {{ $s->is_acc_open ? 'bg-primary': 'bg-danger'}}">{{ $s->is_acc_open ? 'Active': 'Inactive'}}</span>
         <div class="comment_operation">
-          <p><a href="{{ URL::to('/admin-supervisor-edit/'.$s->id) }}" class="input_button comment_operation_edit"><i class="fas fa-edit"></i> Edit Account</a></p>
-          <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminSupervisorDeleteModal{{ $s->id }}"><i class="far fa-trash-alt"></i> Delete Account</a></p>
+          <p><a href="{{ URL::to('/admin-supervisor-edit/'.$s->id) }}" class="input_button comment_operation_edit"><i class="fas fa-edit"></i> Edit</a></p>
+          <p><a href="" class="input_button comment_operation_delete" data-bs-toggle="modal" data-bs-target="#adminSupervisorDeleteModal{{ $s->id }}"><i class="far fa-trash-alt"></i> Delete</a></p>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="adminSupervisorDeleteModal{{ $s->id }}" tabindex="-1" aria-labelledby="adminSupervisorDeleteModalLabel" aria-hidden="true">
