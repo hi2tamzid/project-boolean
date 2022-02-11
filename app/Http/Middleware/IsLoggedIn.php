@@ -17,8 +17,8 @@ class IsLoggedIn
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Session::has('admin_login_id') || Session::has('supervisor   _login_id')){
-            return redirect()->to('/');
+        if(Session::has('admin_login_id') || Session::has('supervisor_login_id')){
+            return redirect()->to('/admin-dashboard');
         }
         return $next($request);
     }

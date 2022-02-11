@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'IsLoggedIn'], function () {
   Route::get('/', [HomeController::class, 'home']);
   Route::get('/register', [HomeController::class, 'register']);
+  Route::get('/login-admin', [AdminController::class, 'login']);
 });
 
 Route::get('/supervisor-login', [AdminController::class, 'supervisorLoginpage']);
@@ -29,7 +30,7 @@ Route::post('/supervisor-login', [AdminController::class, 'supervisorLogin']);
 // Admin
 Route::get('/register-admin', [AdminController::class, 'registerAdmin']);
 Route::post('/store-admin', [AdminController::class, 'storeAdmin']);
-Route::get('/login-admin', [AdminController::class, 'login']);
+
 Route::get('/logout-admin', [AdminController::class, 'logout']);
 Route::post('/login-admin', [AdminController::class, 'loginAdmin']);
 Route::group(['middleware' => 'IsAdminIn'], function () {
